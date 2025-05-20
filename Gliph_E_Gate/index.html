@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Glyph Gate</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to top, #2b124c, #7b4397, #f387ab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    #inputBox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1.1rem;
+      width: 300px;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    #aboutIcon { top: 10%; left: 20%; }
+    #writeIcon { top: 10%; right: 20%; }
+    #moonIcon { top: 30%; left: 10%; }
+    #morphIcon { top: 30%; right: 10%; }
+    #aboutSection, #writingSection {
+      display: none;
+      margin-top: 30px;
+      text-align: center;
+      max-width: 600px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    #elphant {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>The Glyph Gate</h1>
+  <input id="inputBox" placeholder="Say what you see." disabled />
+
+  <img id="aboutIcon" class="icon" src="https://via.placeholder.com/60?text=👤" alt="About Me" />
+  <img id="writeIcon" class="icon" src="https://via.placeholder.com/60?text=🦋" alt="Butterfiles" />
+  <img id="moonIcon" class="icon" src="https://via.placeholder.com/60?text=🌕" alt="Moon Funnel" />
+  <img id="morphIcon" class="icon" src="https://via.placeholder.com/60?text=}{" alt="Morph" />
+
+  <div id="aboutSection">
+    <img src="1.jpg" alt="About Slide 1" style="max-width: 100%; margin-bottom: 10px;" />
+    <img src="2.jpg" alt="About Slide 2" style="max-width: 100%; margin-bottom: 10px;" />
+    <img src="3.jpg" alt="About Slide 3" style="max-width: 100%; margin-bottom: 10px;" />
+    <img src="4.jpg" alt="About Slide 4" style="max-width: 100%;" />
+  </div>
+
+  <div id="writingSection">
+    <p>🦋 Capstone on social media, authenticity, and leadership</p>
+    <p>🦋 Trecces Project</p>
+    <p>🦋 Writing Sample 1</p>
+    <p>🦋 Eisner Disney Case Study</p>
+    <p>🦋 Clipboard Health Case Study</p>
+  </div>
+
+  <div id="elphant">🐘</div>
+
+  <script>
+    const input = document.getElementById("inputBox");
+    const about = document.getElementById("aboutSection");
+    const write = document.getElementById("writingSection");
+
+    function typeText(text, cb) {
+      input.value = "";
+      let i = 0;
+      const interval = setInterval(() => {
+        input.value += text[i];
+        i++;
+        if (i === text.length) {
+          clearInterval(interval);
+          setTimeout(cb, 800);
+        }
+      }, 100);
+    }
+
+    document.getElementById("aboutIcon").onclick = () => {
+      typeText("I see you", () => about.style.display = "block");
+    };
+
+    document.getElementById("writeIcon").onclick = () => {
+      typeText("I see it", () => write.style.display = "block");
+    };
+
+    document.getElementById("moonIcon").onclick = () => {
+      typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
+    };
+
+    document.getElementById("morphIcon").onclick = () => {
+      typeText("I begin", () => window.location.href = "/morph");
+    };
+
+    document.getElementById("elphant").onclick = () => {
+      input.value = "";
+      about.style.display = "none";
+      write.style.display = "none";
+    };
+  </script>
+</body>
+</html>
