@@ -41,6 +41,10 @@ const nextMoves = [
   "🔄 Threaded memory-based conversations",
 ];
 
+const Card = ({ children }) => <div className="rounded shadow p-4 bg-white">{children}</div>;
+const CardContent = ({ children }) => <div>{children}</div>;
+
+
 function recursiveCollapse(options: string[]): string {
   if (options.length === 1) return options[0];
   options.splice(Math.floor(Math.random() * options.length), 1);
