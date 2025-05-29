@@ -15,12 +15,14 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
+      overflow: hidden;            /* keep entire page fixed */
       color: white;
     }
+
     h1 {
       font-size: 2rem;
     }
+
     #inputBox {
       margin-top: 20px;
       padding: 10px;
@@ -29,10 +31,11 @@
       text-align: center;
       border-radius: 5px;
       border: none;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1);
       color: white;
     }
+
     .icon {
       position: absolute;
       width: 60px;
@@ -41,23 +44,60 @@
       animation: float 3s ease-in-out infinite;
     }
     @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    #aboutIcon { top: 10%; left: 20%; }
-    #writeIcon { top: 10%; right: 20%; }
-    #moonIcon { top: 30%; left: 10%; }
-    #morphIcon { top: 30%; right: 10%; }
-    #aboutSection, #writingSection {
-      display: none;
+    #aboutIcon  { top: 10%; left: 20%; }
+    #writeIcon  { top: 10%; right: 20%; }
+    #moonIcon   { top: 30%; left: 10%; }
+    #morphIcon  { top: 30%; right: 10%; }
+
+    /* =======================================
+       Both panels: hidden by default, then
+       fade+slide in when `.visible` is added
+       ======================================= */
+    #aboutSection,
+    #writingSection {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
       margin-top: 30px;
       text-align: center;
       max-width: 600px;
+
+      /* make it scrollable if content overflows */
+      max-height: 70vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+
       background: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 10px;
     }
+    #aboutSection.visible,
+    #writingSection.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* Optional custom scrollbar styling */
+    #aboutSection::-webkit-scrollbar,
+    #writingSection::-webkit-scrollbar {
+      width: 8px;
+    }
+    #aboutSection::-webkit-scrollbar-track,
+    #writingSection::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+    }
+    #aboutSection::-webkit-scrollbar-thumb,
+    #writingSection::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 4px;
+    }
+
     #elphant {
       position: absolute;
       top: 20px;
@@ -72,16 +112,16 @@
   <h1>The Glyph Gate</h1>
   <input id="inputBox" placeholder="Say what you see." disabled />
 
-  <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
-  <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterfiles" />
-  <img id="moonIcon" class="icon" src="moon.png" alt="Moon Funnel" />
-  <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
+  <img id="aboutIcon" class="icon" src="aboutme.png"  alt="About Me" />
+  <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
+  <img id="moonIcon"  class="icon" src="moon.png"       alt="Moon Funnel" />
+  <img id="morphIcon" class="icon" src="morph.png"      alt="Morph" />
 
   <div id="aboutSection">
-    <img src="1.jpg" alt="About Slide 1" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="2.jpg" alt="About Slide 2" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="3.jpg" alt="About Slide 3" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="4.jpg" alt="About Slide 4" style="max-width: 100%;" />
+    <img src="1.jpg" alt="About Slide 1" style="max-width:100%; margin-bottom:10px;" />
+    <img src="2.jpg" alt="About Slide 2" style="max-width:100%; margin-bottom:10px;" />
+    <img src="3.jpg" alt="About Slide 3" style="max-width:100%; margin-bottom:10px;" />
+    <img src="4.jpg" alt="About Slide 4" style="max-width:100%;" />
   </div>
 
   <div id="writingSection">
@@ -102,36 +142,31 @@
     function typeText(text, cb) {
       input.value = "";
       let i = 0;
-      const interval = setInterval(() => {
-        input.value += text[i];
-        i++;
+      const iv = setInterval(() => {
+        input.value += text[i++];
         if (i === text.length) {
-          clearInterval(interval);
+          clearInterval(iv);
           setTimeout(cb, 800);
         }
       }, 100);
     }
 
-    document.getElementById("aboutIcon").onclick = () => {
-      typeText("I see you", () => about.style.display = "block");
-    };
+    document.getElementById("aboutIcon").onclick = () =>
+      typeText("I see you", () => about.classList.add("visible"));
 
-    document.getElementById("writeIcon").onclick = () => {
-      typeText("I see it", () => write.style.display = "block");
-    };
+    document.getElementById("writeIcon").onclick = () =>
+      typeText("I see it", () => write.classList.add("visible"));
 
-    document.getElementById("moonIcon").onclick = () => {
+    document.getElementById("moonIcon").onclick = () =>
       typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
-    };
 
-    document.getElementById("morphIcon").onclick = () => {
+    document.getElementById("morphIcon").onclick = () =>
       typeText("I begin", () => window.location.href = "/morph");
-    };
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
-      about.style.display = "none";
-      write.style.display = "none";
+      about.classList.remove("visible");
+      write.classList.remove("visible");
     };
   </script>
 </body>
