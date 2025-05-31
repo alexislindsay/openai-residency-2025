@@ -15,12 +15,13 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;            /* keep entire page fixed */
+      overflow: hidden;
       color: white;
     }
 
     h1 {
       font-size: 2rem;
+      margin-bottom: 20px; /* Spazio sotto il titolo */
     }
 
     #inputBox {
@@ -36,27 +37,61 @@
       color: white;
     }
 
-    .icon {
+    .icon-container {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 80px; /* Aumentato per contenere il testo */
+      height: 80px; /* Aumentato per contenere il testo */
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
       animation: float 3s ease-in-out infinite;
     }
+
+    .icon-container .icon {
+      width: 60px;
+      height: 60px;
+      position: relative; /* Per posizionare il testo intorno */
+      z-index: 2; /* Assicura che l'icona sia sopra il testo */
+    }
+
+    .icon-label {
+      position: absolute;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 0.7);
+      animation: rotateText 3s linear infinite; /* Animazione per il testo */
+    }
+
+    /* Posizionamento delle etichette (le aggiusteremo con JavaScript) */
+    .icon-container:hover .icon-label {
+        opacity: 1;
+    }
+
     @keyframes float {
       0%   { transform: translateY(0); }
       50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    #aboutIcon  { top: 10%; left: 20%; }
-    #writeIcon  { top: 10%; right: 20%; }
-    #moonIcon   { top: 30%; left: 10%; }
-    #morphIcon  { top: 30%; right: 10%; }
+
+    /* Keyframes per l'animazione del testo circolare */
+    @keyframes rotateText {
+        0% { transform: rotate(0deg) translateX(40px) rotate(0deg); } /* Ruota intorno al centro */
+        100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+    }
+
+
+    #aboutIconContainer { top: 10%; left: 20%; }
+    #writeIconContainer { top: 10%; right: 20%; }
+    #moonIconContainer  { top: 30%; left: 10%; }
+    #morphIconContainer { top: 30%; right: 10%; }
 
     /* =======================================
-       Both panels: hidden by default, then
-       fade+slide in when `.visible` is added
-       ======================================= */
+      Both panels: hidden by default, then
+      fade+slide in when `.visible` is added
+      ======================================= */
     #aboutSection,
     #writingSection {
       opacity: 0;
@@ -66,22 +101,41 @@
       margin-top: 30px;
       text-align: center;
       max-width: 600px;
+      width: 90%; /* Per una migliore responsività */
 
       /* make it scrollable if content overflows */
-      max-height: 100vh;
+      max-height: 125vh; /* Aumentato l'altezza massima per la sezione About */
       overflow-y: auto;
       scroll-behavior: smooth;
 
       background: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 10px;
+      box-sizing: border-box; /* Include padding nel width/height */
+      position: absolute; /* Rimuovi dal flusso normale per posizionamento preciso */
+      z-index: 10; /* Assicurati che sia sopra le icone quando visibile */
     }
+
     #aboutSection.visible,
     #writingSection.visible {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
     }
+
+    /* Posizionamento specifico per i pannelli */
+    #aboutSection {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centra il pannello */
+    }
+
+    #writingSection {
+      top: 40%; /* Spostato più in alto */
+      left: 50%;
+      transform: translate(-50%, -50%); /* Centra il pannello */
+    }
+
 
     /* Optional custom scrollbar styling */
     #aboutSection::-webkit-scrollbar,
@@ -105,26 +159,85 @@
       cursor: pointer;
       font-size: 1.5rem;
       opacity: 0.7;
+      z-index: 100; /* Assicurati che sia sempre cliccabile */
     }
+
+    /* Media queries per la responsività */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+        .icon-container {
+            width: 70px;
+            height: 70px;
+        }
+        .icon-container .icon {
+            width: 50px;
+            height: 50px;
+        }
+        .icon-label {
+            font-size: 0.7rem;
+            animation: rotateTextMobile 3s linear infinite;
+        }
+        @keyframes rotateTextMobile {
+            0% { transform: rotate(0deg) translateX(35px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(35px) rotate(-360deg); }
+        }
+
+        #aboutIconContainer { top: 15%; left: 10%; }
+        #writeIconContainer { top: 15%; right: 10%; }
+        #moonIconContainer  { top: 40%; left: 5%; }
+        #morphIconContainer { top: 40%; right: 5%; }
+
+        #inputBox {
+            width: 80%;
+        }
+
+        #aboutSection,
+        #writingSection {
+            margin-top: 10px;
+            max-height: 80vh; /* Adatta l'altezza per schermi più piccoli */
+        }
+    }
+
+    @media (max-height: 600px) {
+        #aboutSection,
+        #writingSection {
+            max-height: 70vh; /* Riduci ulteriormente per schermi bassi */
+        }
+    }
+
   </style>
 </head>
 <body>
   <h1>The Glyph Gate</h1>
   <input id="inputBox" placeholder="Say what you see." disabled />
 
-  <img id="aboutIcon" class="icon" src="aboutme.png"  alt="About Me" />
-  <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
-  <img id="moonIcon"  class="icon" src="moon.png"       alt="Moon Funnel" />
-  <img id="morphIcon" class="icon" src="morph.png"      alt="Morph" />
+  <div id="aboutIconContainer" class="icon-container">
+    <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
+    <span class="icon-label">About Me</span>
+  </div>
+  <div id="writeIconContainer" class="icon-container">
+    <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
+    <span class="icon-label">My Writing</span>
+  </div>
+  <div id="moonIconContainer" class="icon-container">
+    <img id="moonIcon" class="icon" src="moon.png" alt="Moon Funnel" />
+    <span class="icon-label">Lunar Quiz</span>
+  </div>
+  <div id="morphIconContainer" class="icon-container">
+    <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
+    <span class="icon-label">Morph</span>
+  </div>
 
-  <div id="aboutSection">
+  <div id="aboutSection" class="content-panel">
     <img src="1.jpg" alt="About Slide 1" style="max-width:100%; margin-bottom:10px;" />
     <img src="2.jpg" alt="About Slide 2" style="max-width:100%; margin-bottom:10px;" />
     <img src="3.jpg" alt="About Slide 3" style="max-width:100%; margin-bottom:10px;" />
     <img src="4.jpg" alt="About Slide 4" style="max-width:100%;" />
   </div>
 
-  <div id="writingSection">
+  <div id="writingSection" class="content-panel">
     <p>🦋 Capstone on social media, authenticity, and leadership</p>
     <p>🦋 Trecces Project</p>
     <p>🦋 Writing Sample 1</p>
@@ -136,8 +249,9 @@
 
   <script>
     const input = document.getElementById("inputBox");
-    const about = document.getElementById("aboutSection");
-    const write = document.getElementById("writingSection");
+    const aboutSection = document.getElementById("aboutSection");
+    const writingSection = document.getElementById("writingSection");
+    const contentPanels = document.querySelectorAll(".content-panel"); // Seleziona tutti i pannelli di contenuto
 
     function typeText(text, cb) {
       input.value = "";
@@ -151,23 +265,51 @@
       }, 100);
     }
 
-    document.getElementById("aboutIcon").onclick = () =>
-      typeText("I see you", () => about.classList.add("visible"));
+    function closeAllPanels() {
+      contentPanels.forEach(panel => {
+        panel.classList.remove("visible");
+      });
+    }
 
-    document.getElementById("writeIcon").onclick = () =>
-      typeText("I see it", () => write.classList.add("visible"));
+    document.getElementById("aboutIconContainer").onclick = () => {
+      closeAllPanels(); // Chiudi tutti i pannelli
+      typeText("I see you", () => aboutSection.classList.add("visible"));
+    };
 
-    document.getElementById("moonIcon").onclick = () =>
+    document.getElementById("writeIconContainer").onclick = () => {
+      closeAllPanels(); // Chiudi tutti i pannelli
+      typeText("I see it", () => writingSection.classList.add("visible"));
+    };
+
+    document.getElementById("moonIconContainer").onclick = () =>
       typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
 
-    document.getElementById("morphIcon").onclick = () =>
+    document.getElementById("morphIconContainer").onclick = () =>
       typeText("I begin", () => window.location.href = "/morph");
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
-      about.classList.remove("visible");
-      write.classList.remove("visible");
+      closeAllPanels(); // Chiudi tutti i pannelli
     };
+
+    // Script per il posizionamento circolare delle etichette
+    document.querySelectorAll('.icon-container').forEach(container => {
+        const label = container.querySelector('.icon-label');
+        if (label) {
+            const radius = 40; // Distanza dal centro dell'icona (metà della larghezza/altezza del .icon-container)
+            const numChars = label.textContent.length;
+            const angleIncrement = 360 / numChars;
+
+            let htmlContent = '';
+            for (let i = 0; i < numChars; i++) {
+                const char = label.textContent[i];
+                const angle = i * angleIncrement;
+                htmlContent += `<span style="transform: rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg); position: absolute; top: 50%; left: 50%; transform-origin: 0 0;">${char}</span>`;
+            }
+            label.innerHTML = htmlContent;
+        }
+    });
+
   </script>
 </body>
 </html>
