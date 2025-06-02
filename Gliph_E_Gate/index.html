@@ -18,9 +18,12 @@
       overflow: hidden;
       color: white;
     }
+
     h1 {
       font-size: 2rem;
+      margin-bottom: 20px;
     }
+
     #inputBox {
       margin-top: 20px;
       padding: 10px;
@@ -29,35 +32,129 @@
       text-align: center;
       border-radius: 5px;
       border: none;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1);
       color: white;
+      z-index: 50; /* Ensure it's above other elements but below modals */
+      position: relative; /* Needed for z-index to work */
     }
-    .icon {
+
+    /* Container for the icon and its label */
+    .icon-wrapper { /* Changed from icon-container to avoid confusion with CSS rules */
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 100px; /* Increased to give more room for text */
+      height: 100px; /* Increased to give more room for text */
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
       animation: float 3s ease-in-out infinite;
     }
+
+    .icon-wrapper .icon {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-label-wrapper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none; /* Allows clicks to pass through to the icon */
+      /* animation: rotateLabelWrapper 10s linear infinite; */ /* Moved to individual span animation */
+    }
+
+    .icon-label {
+      position: absolute;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 0.7);
+      transform-origin: center center; /* Crucial for correct rotation */
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
+    }
+
+    .icon-wrapper:hover .icon-label {
+        opacity: 1; /* Show on hover */
+    }
+
+    /* Animation for the floating icons */
     @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    #aboutIcon { top: 10%; left: 20%; }
-    #writeIcon { top: 10%; right: 20%; }
-    #moonIcon { top: 30%; left: 10%; }
-    #morphIcon { top: 30%; right: 10%; }
-    #aboutSection, #writingSection {
-      display: none;
-      margin-top: 30px;
+
+    /* Positions for the icon wrappers */
+    #aboutIconWrapper  { top: 10%; left: 20%; }
+    #writeIconWrapper  { top: 10%; right: 20%; }
+    #moonIconWrapper   { top: 30%; left: 10%; }
+    #morphIconWrapper  { top: 30%; right: 10%; }
+
+
+    /* =======================================
+      Both panels: hidden by default, then
+      fade+slide in when `.visible` is added
+      ======================================= */
+    .content-panel {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -45%) scale(0.9); /* Slightly scaled down, moved up a bit */
+      transition: opacity 0.6s ease, transform 0.6s ease;
       text-align: center;
       max-width: 600px;
-      background: rgba(0, 0, 0, 0.4);
+      width: 90%;
+      max-height: 125vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      background: rgba(0, 0, 0, 0.6); /* Slightly darker background */
       padding: 20px;
       border-radius: 10px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%; /* Centered vertically */
+      left: 50%; /* Centered horizontally */
+      z-index: 10; /* Ensure it's above icons when visible */
     }
+
+    .content-panel.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1); /* Centered and full size */
+    }
+
+    /* Specific height adjustments if needed, but max-height is usually better */
+    #aboutSection {
+        /* max-height: 125vh; is already set in .content-panel */
+    }
+
+    #writingSection {
+        /* max-height: 125vh; is already set in .content-panel */
+        /* You mentioned moving it up, but centering it usually aligns it well.
+           If you still want it slightly higher than center, adjust top: 45% or similar */
+        /* top: 45%; */ /* Example if you want it slightly higher than perfect center */
+    }
+
+
+    /* Optional custom scrollbar styling */
+    .content-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    .content-panel::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+    }
+    .content-panel::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 4px;
+    }
+
     #elphant {
       position: absolute;
       top: 20px;
@@ -65,26 +162,86 @@
       cursor: pointer;
       font-size: 1.5rem;
       opacity: 0.7;
+      z-index: 100;
     }
+
+    /* Media queries for responsiveness */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+        .icon-wrapper .icon {
+            width: 50px;
+            height: 50px;
+        }
+        .icon-label {
+            font-size: 0.6rem; /* Smaller font on mobile */
+        }
+
+        #aboutIconWrapper { top: 15%; left: 10%; }
+        #writeIconWrapper { top: 15%; right: 10%; }
+        #moonIconWrapper  { top: 40%; left: 5%; }
+        #morphIconWrapper { top: 40%; right: 5%; }
+
+        #inputBox {
+            width: 80%;
+        }
+
+        .content-panel {
+            max-height: 80vh;
+            padding: 15px;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .content-panel {
+            max-height: 70vh;
+        }
+    }
+
   </style>
 </head>
 <body>
   <h1>The Glyph Gate</h1>
   <input id="inputBox" placeholder="Say what you see." disabled />
 
-  <img id="aboutIcon" class="icon" src="https://via.placeholder.com/60?text=👤" alt="About Me" />
-  <img id="writeIcon" class="icon" src="https://via.placeholder.com/60?text=🦋" alt="Butterfiles" />
-  <img id="moonIcon" class="icon" src="https://via.placeholder.com/60?text=🌕" alt="Moon Funnel" />
-  <img id="morphIcon" class="icon" src="https://via.placeholder.com/60?text=}{" alt="Morph" />
-
-  <div id="aboutSection">
-    <img src="1.jpg" alt="About Slide 1" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="2.jpg" alt="About Slide 2" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="3.jpg" alt="About Slide 3" style="max-width: 100%; margin-bottom: 10px;" />
-    <img src="4.jpg" alt="About Slide 4" style="max-width: 100%;" />
+  <div id="aboutIconWrapper" class="icon-wrapper">
+    <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label" data-label="About Me"></span>
+    </div>
+  </div>
+  <div id="writeIconWrapper" class="icon-wrapper">
+    <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label" data-label="My Writing"></span>
+    </div>
+  </div>
+  <div id="moonIconWrapper" class="icon-wrapper">
+    <img id="moonIcon" class="icon" src="moon.png" alt="Moon Funnel" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label" data-label="Lunar Quiz"></span>
+    </div>
+  </div>
+  <div id="morphIconWrapper" class="icon-wrapper">
+    <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label" data-label="Morph"></span>
+    </div>
   </div>
 
-  <div id="writingSection">
+  <div id="aboutSection" class="content-panel">
+    <img src="1.jpg" alt="About Slide 1" style="max-width:100%; margin-bottom:10px;" />
+    <img src="2.jpg" alt="About Slide 2" style="max-width:100%; margin-bottom:10px;" />
+    <img src="3.jpg" alt="About Slide 3" style="max-width:100%; margin-bottom:10px;" />
+    <img src="4.jpg" alt="About Slide 4" style="max-width:100%;" />
+  </div>
+
+  <div id="writingSection" class="content-panel">
     <p>🦋 Capstone on social media, authenticity, and leadership</p>
     <p>🦋 Trecces Project</p>
     <p>🦋 Writing Sample 1</p>
@@ -96,43 +253,104 @@
 
   <script>
     const input = document.getElementById("inputBox");
-    const about = document.getElementById("aboutSection");
-    const write = document.getElementById("writingSection");
+    const aboutSection = document.getElementById("aboutSection");
+    const writingSection = document.getElementById("writingSection");
+    const contentPanels = document.querySelectorAll(".content-panel");
 
     function typeText(text, cb) {
       input.value = "";
       let i = 0;
-      const interval = setInterval(() => {
-        input.value += text[i];
-        i++;
+      const iv = setInterval(() => {
+        input.value += text[i++];
         if (i === text.length) {
-          clearInterval(interval);
+          clearInterval(iv);
           setTimeout(cb, 800);
         }
       }, 100);
     }
 
-    document.getElementById("aboutIcon").onclick = () => {
-      typeText("I see you", () => about.style.display = "block");
+    function closeAllPanels() {
+      contentPanels.forEach(panel => {
+        panel.classList.remove("visible");
+      });
+    }
+
+    document.getElementById("aboutIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I see you", () => aboutSection.classList.add("visible"));
     };
 
-    document.getElementById("writeIcon").onclick = () => {
-      typeText("I see it", () => write.style.display = "block");
+    document.getElementById("writeIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I see it", () => writingSection.classList.add("visible"));
     };
 
-    document.getElementById("moonIcon").onclick = () => {
+    document.getElementById("moonIconWrapper").onclick = () =>
       typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
-    };
 
-    document.getElementById("morphIcon").onclick = () => {
+    document.getElementById("morphIconWrapper").onclick = () =>
       typeText("I begin", () => window.location.href = "/morph");
-    };
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
-      about.style.display = "none";
-      write.style.display = "none";
+      closeAllPanels();
     };
+
+    // Script per il posizionamento circolare delle etichette e animazione
+    document.querySelectorAll('.icon-label').forEach(labelSpan => {
+        const labelText = labelSpan.dataset.label; // Get text from data-label attribute
+        labelSpan.innerHTML = ''; // Clear existing content
+
+        const numChars = labelText.length;
+        const angleIncrement = 360 / numChars;
+        const radius = 40; // Distance from the center of the icon (half of the .icon-wrapper width/height)
+
+        for (let i = 0; i < numChars; i++) {
+            const char = labelText[i];
+            const angle = i * angleIncrement; // Angle for each character
+
+            const charSpan = document.createElement('span');
+            charSpan.textContent = char;
+            charSpan.style.position = 'absolute';
+            charSpan.style.transformOrigin = 'center center'; // Ensure rotation is around its own center
+            charSpan.style.transform = `
+                rotate(${angle}deg)
+                translate(${radius}px)
+                rotate(-90deg) /* Rotate char to be upright, initial banner position */
+                rotate(calc(-${angle}deg - var(--total-rotation, 0deg))) /* Adjust for individual char rotation and banner rotation */
+            `;
+            // Add animation to each character span
+            charSpan.style.animation = `rotateChar 10s linear infinite`;
+            charSpan.style.animationDelay = `${(i * 0.05)}s`; /* Stagger the animation slightly */
+
+            labelSpan.appendChild(charSpan);
+        }
+
+        // Apply a general rotation to the entire label container to make it circle like a banner
+        const labelWrapper = labelSpan.closest('.icon-label-wrapper');
+        if (labelWrapper) {
+            labelWrapper.style.animation = `rotateBanner 10s linear infinite`;
+        }
+    });
+
+    // Keyframes for the banner rotation
+    const styleSheet = document.styleSheets[0]; // Get the first stylesheet
+    styleSheet.insertRule(`
+        @keyframes rotateBanner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `, styleSheet.cssRules.length);
+
+    // Keyframes for individual character rotation to keep them upright relative to the banner
+    styleSheet.insertRule(`
+        @keyframes rotateChar {
+            0% { transform: rotate(-90deg) rotate(0deg); } /* Initial position + compensate for banner rotation */
+            100% { transform: rotate(-90deg) rotate(-360deg); } /* Rotate backwards to stay upright */
+        }
+    `, styleSheet.cssRules.length);
+
+
   </script>
 </body>
 </html>
