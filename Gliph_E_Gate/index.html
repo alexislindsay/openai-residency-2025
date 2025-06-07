@@ -277,19 +277,33 @@
 
     document.getElementById("aboutIconWrapper").onclick = () => {
       closeAllPanels();
-      typeText("I see you", () => aboutSection.classList.add("visible"));
+      typeText("I see you", () => {
+        aboutSection.classList.add("visible");
+        input.value = ""; // Clear after showing panel
+      });
     };
 
     document.getElementById("writeIconWrapper").onclick = () => {
       closeAllPanels();
-      typeText("I see it", () => writingSection.classList.add("visible"));
+      typeText("I see it", () => {
+        writingSection.classList.add("visible");
+        input.value = ""; // Clear after showing panel
+      });
     };
 
-    document.getElementById("moonIconWrapper").onclick = () =>
-      typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
+    document.getElementById("moonIconWrapper").onclick = () => {
+      typeText("I remember", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://lunarquiz.carrd.co/";
+      });
+    };
 
-    document.getElementById("morphIconWrapper").onclick = () =>
-      typeText("I begin", () => window.location.href = "/morph");
+    document.getElementById("morphIconWrapper").onclick = () => {
+      typeText("I begin", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "/morph";
+      });
+    };
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
