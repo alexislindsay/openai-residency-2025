@@ -32,8 +32,8 @@
       text-align: center;
       border-radius: 5px;
       border: none;
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.25);
       color: white;
       z-index: 50; /* Ensure it's above other elements but below modals */
       position: relative; /* Needed for z-index to work */
@@ -60,29 +60,20 @@
 
     .icon-label-wrapper {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      top: calc(100% + 5px);
+      left: 50%;
+      transform: translateX(-50%);
       pointer-events: none; /* Allows clicks to pass through to the icon */
-      /* animation: rotateLabelWrapper 10s linear infinite; */ /* Moved to individual span animation */
     }
 
     .icon-label {
-      position: absolute;
+      position: relative;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       white-space: nowrap;
-      color: rgba(255, 255, 255, 0.7);
-      transform-origin: center center; /* Crucial for correct rotation */
-      opacity: 0; /* Hidden by default */
-      transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
-    }
-
-    .icon-wrapper:hover .icon-label {
-        opacity: 1; /* Show on hover */
+      color: rgba(255, 255, 255, 1);
+      opacity: 1; /* Always visible */
     }
 
     /* Animation for the floating icons */
@@ -114,14 +105,14 @@
       max-height: 125vh;
       overflow-y: auto;
       scroll-behavior: smooth;
-      background: rgba(0, 0, 0, 0.6); /* Slightly darker background */
+      background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
       padding: 20px;
       border-radius: 10px;
       box-sizing: border-box;
       position: absolute;
       top: 50%; /* Centered vertically */
       left: 50%; /* Centered horizontally */
-      z-index: 10; /* Ensure it's above icons when visible */
+      z-index: 60; /* Above the input box so it's fully covered */
     }
 
     .content-panel.visible {
@@ -148,10 +139,10 @@
       width: 8px;
     }
     .content-panel::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.3);
     }
     .content-panel::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.6);
       border-radius: 4px;
     }
 
@@ -161,7 +152,7 @@
       right: 20px;
       cursor: pointer;
       font-size: 1.5rem;
-      opacity: 0.7;
+      opacity: 1;
       z-index: 100;
     }
 
@@ -212,25 +203,25 @@
   <div id="aboutIconWrapper" class="icon-wrapper">
     <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
     <div class="icon-label-wrapper">
-      <span class="icon-label" data-label="About Me"></span>
+      <span class="icon-label">About Me</span>
     </div>
   </div>
   <div id="writeIconWrapper" class="icon-wrapper">
     <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
     <div class="icon-label-wrapper">
-      <span class="icon-label" data-label="My Writing"></span>
+      <span class="icon-label">My Writing</span>
     </div>
   </div>
   <div id="moonIconWrapper" class="icon-wrapper">
     <img id="moonIcon" class="icon" src="moon.png" alt="Moon Funnel" />
     <div class="icon-label-wrapper">
-      <span class="icon-label" data-label="Lunar Quiz"></span>
+      <span class="icon-label">Lunar Quiz</span>
     </div>
   </div>
   <div id="morphIconWrapper" class="icon-wrapper">
     <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
     <div class="icon-label-wrapper">
-      <span class="icon-label" data-label="Morph"></span>
+      <span class="icon-label">Morph</span>
     </div>
   </div>
 
@@ -277,78 +268,40 @@
 
     document.getElementById("aboutIconWrapper").onclick = () => {
       closeAllPanels();
-      typeText("I see you", () => aboutSection.classList.add("visible"));
+      typeText("I see you", () => {
+        aboutSection.classList.add("visible");
+        input.value = ""; // Clear after showing panel
+      });
     };
 
     document.getElementById("writeIconWrapper").onclick = () => {
       closeAllPanels();
-      typeText("I see it", () => writingSection.classList.add("visible"));
+      typeText("I see it", () => {
+        writingSection.classList.add("visible");
+        input.value = ""; // Clear after showing panel
+      });
     };
 
-    document.getElementById("moonIconWrapper").onclick = () =>
-      typeText("I remember", () => window.location.href = "https://lunarquiz.carrd.co/");
+    document.getElementById("moonIconWrapper").onclick = () => {
+      typeText("I remember", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://lunarquiz.carrd.co/";
+      });
+    };
 
-    document.getElementById("morphIconWrapper").onclick = () =>
-      typeText("I begin", () => window.location.href = "/morph");
+    document.getElementById("morphIconWrapper").onclick = () => {
+      typeText("I begin", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://github.com/alexislindsay/moon-ui-divination-portal";
+      });
+    };
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
       closeAllPanels();
     };
 
-    // Script per il posizionamento circolare delle etichette e animazione
-    document.querySelectorAll('.icon-label').forEach(labelSpan => {
-        const labelText = labelSpan.dataset.label; // Get text from data-label attribute
-        labelSpan.innerHTML = ''; // Clear existing content
-
-        const numChars = labelText.length;
-        const angleIncrement = 360 / numChars;
-        const radius = 40; // Distance from the center of the icon (half of the .icon-wrapper width/height)
-
-        for (let i = 0; i < numChars; i++) {
-            const char = labelText[i];
-            const angle = i * angleIncrement; // Angle for each character
-
-            const charSpan = document.createElement('span');
-            charSpan.textContent = char;
-            charSpan.style.position = 'absolute';
-            charSpan.style.transformOrigin = 'center center'; // Ensure rotation is around its own center
-            charSpan.style.transform = `
-                rotate(${angle}deg)
-                translate(${radius}px)
-                rotate(-90deg) /* Rotate char to be upright, initial banner position */
-                rotate(calc(-${angle}deg - var(--total-rotation, 0deg))) /* Adjust for individual char rotation and banner rotation */
-            `;
-            // Add animation to each character span
-            charSpan.style.animation = `rotateChar 10s linear infinite`;
-            charSpan.style.animationDelay = `${(i * 0.05)}s`; /* Stagger the animation slightly */
-
-            labelSpan.appendChild(charSpan);
-        }
-
-        // Apply a general rotation to the entire label container to make it circle like a banner
-        const labelWrapper = labelSpan.closest('.icon-label-wrapper');
-        if (labelWrapper) {
-            labelWrapper.style.animation = `rotateBanner 10s linear infinite`;
-        }
-    });
-
-    // Keyframes for the banner rotation
-    const styleSheet = document.styleSheets[0]; // Get the first stylesheet
-    styleSheet.insertRule(`
-        @keyframes rotateBanner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    `, styleSheet.cssRules.length);
-
-    // Keyframes for individual character rotation to keep them upright relative to the banner
-    styleSheet.insertRule(`
-        @keyframes rotateChar {
-            0% { transform: rotate(-90deg) rotate(0deg); } /* Initial position + compensate for banner rotation */
-            100% { transform: rotate(-90deg) rotate(-360deg); } /* Rotate backwards to stay upright */
-        }
-    `, styleSheet.cssRules.length);
+    // Ensure labels display even if JavaScript is disabled
 
 
   </script>
