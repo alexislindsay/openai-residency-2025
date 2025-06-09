@@ -63,7 +63,11 @@
       top: calc(100% + 5px);
       left: 50%;
       transform: translateX(-50%);
+      width: max-content;
+      max-width: 120px;
+      text-align: center;
       pointer-events: none; /* Allows clicks to pass through to the icon */
+      z-index: 3; /* Ensure text is above the icon */
     }
 
     .icon-label {
