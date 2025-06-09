@@ -77,7 +77,17 @@
       letter-spacing: 1px;
       white-space: nowrap;
       color: rgba(255, 255, 255, 1);
+ 9tw6pp-codex/update-index-page-elements-display
       opacity: 1; /* Always visible */
+=======
+      transform-origin: center center; /* Crucial for correct rotation */
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
+    }
+
+    .icon-wrapper:hover .icon-label {
+        opacity: 1; /* Show on hover */
+ main
     }
 
     /* Animation for the floating icons */
@@ -109,7 +119,11 @@
       max-height: 125vh;
       overflow-y: auto;
       scroll-behavior: smooth;
+9tw6pp-codex/update-index-page-elements-display
       background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
+=======
+      background: rgba(0, 0, 0, 0.95); /* More opaque so underlying text doesn't show */
+main
       padding: 20px;
       border-radius: 10px;
       box-sizing: border-box;
