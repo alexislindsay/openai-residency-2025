@@ -295,8 +295,8 @@ main
     document.getElementById("writeIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I see it", () => {
-        writingSection.classList.add("visible");
-        input.value = ""; // Clear after showing panel
+        input.value = ""; // Clear before navigating
+        window.location.href = "../glyphgate/index.html";
       });
     };
 
