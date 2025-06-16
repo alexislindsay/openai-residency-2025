@@ -1,68 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Butterfiles</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: #f0e6f7;
-    }
-    .container {
-      text-align: center;
-    }
-    a {
-      color: #663399;
-    }
-  </style>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mindful Social Media Engagement - Combined</title>
+    <title>Glyph Gate Continuance</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background: linear-gradient(to bottom, #113350, #3377aa, #b8ffff);
+            color: #002b33;
         }
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.4);
+            color: #007f9f;
+            padding: 20px 0;
             text-align: center;
+        }
+        #ticker {
+            font-family: monospace;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 5px;
+            color: #007f9f;
         }
         nav {
-            padding: 15px;
-            text-align: center;
-            background: #333;
-            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
         }
         nav a {
-            color: white;
-            margin: 0 10px;
+            color: #007f9f;
+            margin: 8px 0;
             text-decoration: none;
+        }
+        .container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        a {
+            color: #007f9f;
         }
         section {
             padding: 20px;
-            margin: 10px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 127, 159, 0.2);
         }
         h2 {
-            color: #4CAF50;
+            color: #007f9f;
         }
         iframe, blockquote {
             width: 100%;
@@ -76,13 +67,13 @@
             margin-top: 20px;
         }
         .day-forecast {
-            background-color: #e6ffe6;
+            background: rgba(255, 255, 255, 0.6);
             padding: 15px;
             border-radius: 5px;
             text-align: center;
         }
         .day-forecast h2 {
-            color: #333;
+            color: #007f9f;
             margin-top: 0;
             font-size: 1.2em;
         }
@@ -97,7 +88,8 @@
 
 
 <header>
-    <h1>Mindful Social Media Engagement</h1>
+    <h1>Glyph Gate Continuance</h1>
+    <div id="ticker"></div>
 </header>
 
 <nav>
@@ -152,7 +144,7 @@
     <div id="weather-data"></div>
 
     <script>
-        const weatherAPI = https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m"; // Replace with your actual Open-Meteo API key
+        const weatherAPI = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m";
 
         fetch(weatherAPI)
             .then(response => response.json())
@@ -193,9 +185,20 @@
 </section>
 
   <div class="container">
-    <h1>Butterfiles</h1>
-    <p>Welcome to the butterfiles subdomain of alexislindsay.com.</p>
+    <h1>Glyph Gate Node</h1>
+    <p>Welcome to the glyph gate subdomain of alexislindsay.com.</p>
     <p><a href="https://www.alexislindsay.com/">Return to the Glyph Gate</a></p>
   </div>
+
+  <script>
+    function updateTicker() {
+        const now = new Date();
+        const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+                          hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('ticker').textContent = now.toLocaleDateString('en-US', options);
+    }
+    updateTicker();
+    setInterval(updateTicker, 1000);
+  </script>
 </body>
 </html>
