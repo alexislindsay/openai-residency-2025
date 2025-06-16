@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glyph Gate Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to top, #001021, #0047ab, #ff8bf5);
+      color: white;
+      overflow: hidden;
+    }
+    #weather {
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    #libraryPanel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 70%;
+      background: rgba(0,0,0,0.9);
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+    }
+    #libraryPanel iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+    }
+    #closeEle {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    #libraryBtn {
+      margin-top: 20px;
+      cursor: pointer;
+      padding: 10px 20px;
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="weather">
+    <h1>72°F and Sunny</h1>
+    <button id="libraryBtn">Open Library</button>
+  </div>
+
+  <div id="libraryPanel">
+    <div id="closeEle">🐘</div>
+    <iframe src="Gliph_E_Gate/library.html"></iframe>
+  </div>
+
+  <script>
+    const libraryBtn = document.getElementById('libraryBtn');
+    const libraryPanel = document.getElementById('libraryPanel');
+    const closeEle = document.getElementById('closeEle');
+
+    libraryBtn.onclick = () => {
+      libraryPanel.style.display = 'flex';
+    };
+
+    closeEle.onclick = () => {
+      libraryPanel.style.display = 'none';
+    };
+  </script>
+</body>
+</html>
