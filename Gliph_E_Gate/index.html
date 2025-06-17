@@ -60,7 +60,7 @@
 
     .icon-label-wrapper {
       position: absolute;
-      top: calc(100% + 1px);
+      top: calc(100%);
       left: 50%;
       transform: translateX(-50%);
       width: max-content;
@@ -95,22 +95,22 @@
     #moonIconWrapper  { top: 30%; left: 10%; }
     #morphIconWrapper { top: 30%; right: 10%; }
     #manifestIconWrapper {
-  top: 5%;
-  left: 42%;
-  transform: translateX(-50%) rotate(-20deg);
-  width: 133px;
-  height: 133px;
-}
+      top: 5%;
+      left: 42%;
+      transform: translateX(-50%) rotate(-20deg);
+      width: 133px;
+      height: 133px;
+    }
     #sendLoveLeftWrapper { bottom: 8%; left: 10%; }
     #sendLoveRightWrapper { bottom: 8%; right: 10%; }
 
     .manifestation-glyph {
-  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
-  filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
-  transition: all 0.5s ease-in-out;
-  animation: float 4s ease-in-out infinite;
-}
+      mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
+      transition: all 0.5s ease-in-out;
+      animation: float 4s ease-in-out infinite;
+    }
 
     .manifestation-glyph:hover {
       filter: drop-shadow(0 0 14px rgba(255, 255, 220, 0.9));
@@ -151,12 +151,9 @@
     }
   </style>
 </head>
-<body>
-  <h1>The Glyph Gate</h1>
-  <input id="inputBox" placeholder="Say what you see." disabled />
-
-  <!-- Restored icons and labels example -->
-  <div id="aboutIconWrapper" class="icon-wrapper">
+$1
+  
+<div id="aboutIconWrapper" class="icon-wrapper">
     <img class="icon" src="aboutme.png" alt="About Me">
     <div class="icon-label-wrapper"><span class="icon-label">About Me</span></div>
   </div>
@@ -184,5 +181,62 @@
     <img class="icon sendlove-glyph" src="sendlove.png" alt="Send Love">
     <div class="icon-label-wrapper"><span class="icon-label">Send Love</span></div>
   </div>
+  <div id="elphant">🐘</div>
+  <script>
+    const input = document.getElementById("inputBox");
+
+    function typeText(text, cb) {
+      input.value = "";
+      let i = 0;
+      const iv = setInterval(() => {
+        input.value += text[i++];
+        if (i === text.length) {
+          clearInterval(iv);
+          setTimeout(cb, 800);
+        }
+      }, 100);
+    }
+
+    document.getElementById("manifestIconWrapper").onclick = () => {
+      window.location.href = "http://tee.pub/lic/A6IEXDdSbt8";
+    };
+    document.getElementById("aboutIconWrapper").onclick = () => {
+      typeText("I see you", () => { input.value = ""; });
+    };
+    document.getElementById("writeIconWrapper").onclick = () => {
+      typeText("I see it", () => {
+        input.value = "";
+        window.location.href = "https://butterfiles.alexislindsay.com/";
+      });
+    };
+    document.getElementById("moonIconWrapper").onclick = () => {
+      typeText("I remember", () => {
+        input.value = "";
+        window.location.href = "https://lunarquiz.carrd.co/";
+      });
+    };
+    document.getElementById("morphIconWrapper").onclick = () => {
+      typeText("I begin", () => {
+        input.value = "";
+        window.location.href = "https://moon-ui-divination-portal.vercel.app/";
+      });
+    };
+    document.getElementById("sendLoveLeftWrapper").onclick = () => {
+      typeText("I LOVE...", () => {
+        input.value = "";
+        window.location.href = "https://www.alexislindsay.com/sendlove";
+      });
+    };
+    document.getElementById("sendLoveRightWrapper").onclick = () => {
+      typeText("I GIVE...", () => {
+        input.value = "";
+        window.location.href = "https://www.alexislindsay.com/sendlove";
+      });
+    };
+    const elphant = document.getElementById("elphant");
+    if (elphant) {
+      elphant.onclick = () => { input.value = ""; };
+    }
+  </script>
 </body>
 </html>
