@@ -200,6 +200,208 @@ $1
     document.getElementById("manifestIconWrapper").onclick = () => {
       window.location.href = "http://tee.pub/lic/A6IEXDdSbt8";
     };
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Glyph Gate</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to top, #2b124c, #7b4397, #f387ab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #inputBox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1.1rem;
+      width: 300px;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.25);
+      color: white;
+      z-index: 50;
+      position: relative;
+    }
+
+    .icon-wrapper {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+      flex-direction: column;
+    }
+
+    .icon-wrapper .icon {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-label-wrapper {
+      position: absolute;
+      top: calc(100%);
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 120px;
+      text-align: center;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .icon-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 1);
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .icon-wrapper:hover .icon-label {
+      opacity: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    #aboutIconWrapper { top: 10%; left: 20%; }
+    #writeIconWrapper { top: 10%; right: 20%; }
+    #moonIconWrapper  { top: 30%; left: 10%; }
+    #morphIconWrapper { top: 30%; right: 10%; }
+    #manifestIconWrapper {
+      top: 5%;
+      left: 42%;
+      transform: translateX(-50%) rotate(-20deg);
+      width: 133px;
+      height: 133px;
+    }
+    #sendLoveLeftWrapper { bottom: 8%; left: 10%; }
+    #sendLoveRightWrapper { bottom: 8%; right: 10%; }
+
+    .manifestation-glyph {
+      mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
+      transition: all 0.5s ease-in-out;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .manifestation-glyph:hover {
+      filter: drop-shadow(0 0 14px rgba(255, 255, 220, 0.9));
+      transform: scale(1.05);
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 10px rgba(255, 255, 200, 0.5));
+      }
+      50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9));
+      }
+    }
+
+    .sendlove-glyph {
+      filter: drop-shadow(0 0 5px rgba(255, 200, 255, 0.5));
+      transition: all 0.5s ease-in-out;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .sendlove-glyph:hover {
+      filter: drop-shadow(0 0 15px rgba(255, 220, 255, 0.9));
+      transform: scale(1.1);
+    }
+
+    #elphant {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      opacity: 1;
+      z-index: 100;
+    }
+  </style>
+</head>
+$1
+  
+<div id="aboutIconWrapper" class="icon-wrapper">
+    <img class="icon" src="aboutme.png" alt="About Me">
+    <div class="icon-label-wrapper"><span class="icon-label">About Me</span></div>
+  </div>
+  <div id="writeIconWrapper" class="icon-wrapper">
+    <img class="icon" src="butterfiles.png" alt="Butterflies">
+    <div class="icon-label-wrapper"><span class="icon-label">My Writing</span></div>
+  </div>
+  <div id="moonIconWrapper" class="icon-wrapper">
+    <img class="icon" src="moon.png" alt="Moon Funnel">
+    <div class="icon-label-wrapper"><span class="icon-label">Lunar Astroloogy</span></div>
+  </div>
+  <div id="morphIconWrapper" class="icon-wrapper">
+    <img class="icon" src="morph.png" alt="Morph">
+    <div class="icon-label-wrapper"><span class="icon-label">Coded Meaning</span></div>
+  </div>
+  <div id="manifestIconWrapper" class="icon-wrapper">
+    <img class="icon manifestation-glyph" style="width: 80px; height: 80px;" src="manifestations.png" alt="Manifestations">
+    <div class="icon-label-wrapper"><span class="icon-label">Manifestations</span></div>
+  </div>
+  <div id="sendLoveLeftWrapper" class="icon-wrapper">
+    <img class="icon sendlove-glyph" src="sendlove.png" alt="Send Love">
+    <div class="icon-label-wrapper"><span class="icon-label">Send Love</span></div>
+  </div>
+  <div id="sendLoveRightWrapper" class="icon-wrapper">
+    <img class="icon sendlove-glyph" src="sendlove.png" alt="Send Love">
+    <div class="icon-label-wrapper"><span class="icon-label">Send Love</span></div>
+  </div>
+  <div id="elphant">🐘</div>
+  <script>
+    const input = document.getElementById("inputBox");
+
+    function typeText(text, cb) {
+      input.value = "";
+      let i = 0;
+      const iv = setInterval(() => {
+        input.value += text[i++];
+        if (i === text.length) {
+          clearInterval(iv);
+          setTimeout(cb, 800);
+        }
+      }, 100);
+    }
+
+    document.getElementById("manifestIconWrapper").onclick = () => {
+      window.location.href = "http://tee.pub/lic/A6IEXDdSbt8";
+    };
     document.getElementById("aboutIconWrapper").onclick = () => {
       typeText("I see you", () => { input.value = ""; });
     };
@@ -233,6 +435,25 @@ $1
         window.location.href = "https://www.alexislindsay.com/sendlove";
       });
     };
+    const elphant = document.getElementById("elphant");
+    if (elphant) {
+      elphant.onclick = () => { input.value = ""; };
+    }
+
+
+    document.getElementById("sendLoveLeftWrapper").onclick = () => {
+      typeText("I LOVE...", () => {
+        input.value = "";
+        window.location.href = "https://www.alexislindsay.com/sendlove";
+      });
+    };
+    document.getElementById("sendLoveRightWrapper").onclick = () => {
+      typeText("I GIVE...", () => {
+        input.value = "";
+        window.location.href = "https://www.alexislindsay.com/sendlove";
+      });
+    };
+
     const elphant = document.getElementById("elphant");
     if (elphant) {
       elphant.onclick = () => { input.value = ""; };
