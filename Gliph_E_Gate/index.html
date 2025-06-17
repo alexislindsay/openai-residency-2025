@@ -96,8 +96,8 @@
     #morphIconWrapper { top: 30%; right: 10%; }
     #manifestIconWrapper {
   top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 42%;
+  transform: translateX(-50%) rotate(-20deg);
   width: 133px;
   height: 133px;
 }
@@ -105,12 +105,12 @@
     #sendLoveRightWrapper { bottom: 8%; right: 10%; }
 
     .manifestation-glyph {
-      mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-      filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
-      transition: all 0.5s ease-in-out;
-      animation: float 4s ease-in-out infinite;
-    }
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
+  transition: all 0.5s ease-in-out;
+  animation: float 4s ease-in-out infinite;
+}
 
     .manifestation-glyph:hover {
       filter: drop-shadow(0 0 14px rgba(255, 255, 220, 0.9));
