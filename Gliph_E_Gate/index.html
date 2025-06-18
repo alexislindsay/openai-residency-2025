@@ -24,40 +24,6 @@
       margin-bottom: 20px;
     }
 
-    /* Position for Manifestations glyph */
-    #manifestIconWrapper {
-      top: 60%;
-      left: 45%;
-    }
-
-    /* Specific stylings for the glowing butterfly */
-    .manifestation-glyph {
-      mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-      filter: drop-shadow(0 0 6px rgba(255, 255, 200, 0.4));
-      transition: all 0.5s ease-in-out;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    /* Glow and pulse on hover */
-    .manifestation-glyph:hover {
-      filter: drop-shadow(0 0 14px rgba(255, 255, 220, 0.9));
-      transform: scale(1.05);
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-
-    /* Pulse animation */
-    @keyframes pulseGlow {
-      0%, 100% {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 10px rgba(255, 255, 200, 0.5));
-      }
-      50% {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9));
-      }
-    }
-
     #inputBox {
       margin-top: 20px;
       padding: 10px;
@@ -74,7 +40,7 @@
     }
 
     /* Container for the icon and its label */
-    .icon-wrapper {
+    .icon-wrapper { /* Changed from icon-container to avoid confusion with CSS rules */
       position: absolute;
       width: 100px; /* Increased to give more room for text */
       height: 100px; /* Increased to give more room for text */
@@ -111,13 +77,17 @@
       letter-spacing: 1px;
       white-space: nowrap;
       color: rgba(255, 255, 255, 1);
-      transform-origin: center center;
+ 9tw6pp-codex/update-index-page-elements-display
+      opacity: 1; /* Always visible */
+=======
+      transform-origin: center center; /* Crucial for correct rotation */
       opacity: 0; /* Hidden by default */
       transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
     }
 
     .icon-wrapper:hover .icon-label {
         opacity: 1; /* Show on hover */
+ main
     }
 
     /* Animation for the floating icons */
@@ -149,7 +119,11 @@
       max-height: 125vh;
       overflow-y: auto;
       scroll-behavior: smooth;
+9tw6pp-codex/update-index-page-elements-display
+      background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
+=======
       background: rgba(0, 0, 0, 0.95); /* More opaque so underlying text doesn't show */
+main
       padding: 20px;
       border-radius: 10px;
       box-sizing: border-box;
@@ -172,8 +146,11 @@
 
     #writingSection {
         /* max-height: 125vh; is already set in .content-panel */
-        /* If you still want it slightly higher than center, adjust top: 45% or similar */
+        /* You mentioned moving it up, but centering it usually aligns it well.
+           If you still want it slightly higher than center, adjust top: 45% or similar */
+        /* top: 45%; */ /* Example if you want it slightly higher than perfect center */
     }
+
 
     /* Optional custom scrollbar styling */
     .content-panel::-webkit-scrollbar {
@@ -265,12 +242,6 @@
       <span class="icon-label">Morph</span>
     </div>
   </div>
-  <div id="manifestIconWrapper" class="icon-wrapper">
-    <img id="manifestIcon" class="icon manifestation-glyph" src="manifestations.png" alt="Manifestations" />
-    <div class="icon-label-wrapper">
-      <span class="icon-label">Manifestations</span>
-    </div>
-  </div>
 
   <div id="aboutSection" class="content-panel">
     <img src="1.jpg" alt="About Slide 1" style="max-width:100%; margin-bottom:10px;" />
@@ -349,12 +320,7 @@
     };
 
     // Ensure labels display even if JavaScript is disabled
-    document.getElementById("manifestIconWrapper").onclick = () => {
-      typeText("I want it", () => {
-        input.value = "";
-        window.location.href = "https://www.alexislindsay.shop/";
-      });
-    };
+
 
   </script>
 </body>
