@@ -1,137 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glyph Gate Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Glyph Gate</title>
   <style>
     body {
-      font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #113350, #3377aa, #b8ffff);
-      color: #002b33;
-    }
-    header {
-      background: rgba(255, 255, 255, 0.8);
-      color: #007f9f;
-      padding: 20px 0;
-      text-align: center;
-    }
-    #ticker {
-      font-family: monospace;
-      margin-top: 10px;
-      background: rgba(255, 255, 255, 0.6);
-      padding: 5px;
-      color: #007f9f;
-    }
-    nav {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to top, #2b124c, #7b4397, #f387ab);
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7);
+      height: 100vh;
+      overflow: hidden;
+      color: white;
     }
-    nav a {
-      color: #00ffff;
-      margin: 8px 16px;
-      text-decoration: none;
-      font-weight: bold;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
     }
-    .container {
+
+    #inputBox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1.1rem;
+      width: 300px;
       text-align: center;
-      margin: 40px 0;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.25);
+      color: white;
+      z-index: 50; /* Ensure it's above other elements but below modals */
+      position: relative; /* Needed for z-index to work */
     }
-    section {
+
+    /* Container for the icon and its label */
+    .icon-wrapper { /* Changed from icon-container to avoid confusion with CSS rules */
+      position: absolute;
+      width: 100px; /* Increased to give more room for text */
+      height: 100px; /* Increased to give more room for text */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .icon-wrapper .icon {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-label-wrapper {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 120px;
+      text-align: center;
+      pointer-events: none; /* Allows clicks to pass through to the icon */
+      z-index: 3; /* Ensure text is above the icon */
+    }
+
+    .icon-label {
+      position: relative;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 1);
+ 9tw6pp-codex/update-index-page-elements-display
+      opacity: 1; /* Always visible */
+=======
+      transform-origin: center center; /* Crucial for correct rotation */
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
+    }
+
+    .icon-wrapper:hover .icon-label {
+        opacity: 1; /* Show on hover */
+ main
+    }
+
+    /* Animation for the floating icons */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Positions for the icon wrappers */
+    #aboutIconWrapper  { top: 10%; left: 20%; }
+    #writeIconWrapper  { top: 10%; right: 20%; }
+    #moonIconWrapper   { top: 30%; left: 10%; }
+    #morphIconWrapper  { top: 30%; right: 10%; }
+
+
+    /* =======================================
+      Both panels: hidden by default, then
+      fade+slide in when `.visible` is added
+      ======================================= */
+    .content-panel {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -45%) scale(0.9); /* Slightly scaled down, moved up a bit */
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      max-height: 125vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+9tw6pp-codex/update-index-page-elements-display
+      background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
+=======
+      background: rgba(0, 0, 0, 0.95); /* More opaque so underlying text doesn't show */
+main
       padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 127, 159, 0.2);
+      border-radius: 10px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%; /* Centered vertically */
+      left: 50%; /* Centered horizontally */
+      z-index: 60; /* Above the input box so it's fully covered */
     }
-    h2 {
-      color: #007f9f;
+
+    .content-panel.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1); /* Centered and full size */
     }
-    ul {
-      text-align: left;
+
+    /* Specific height adjustments if needed, but max-height is usually better */
+    #aboutSection {
+        /* max-height: 125vh; is already set in .content-panel */
     }
+
+    #writingSection {
+        /* max-height: 125vh; is already set in .content-panel */
+        /* You mentioned moving it up, but centering it usually aligns it well.
+           If you still want it slightly higher than center, adjust top: 45% or similar */
+        /* top: 45%; */ /* Example if you want it slightly higher than perfect center */
+    }
+
+
+    /* Optional custom scrollbar styling */
+    .content-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    .content-panel::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.3);
+    }
+    .content-panel::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.6);
+      border-radius: 4px;
+    }
+
+    #elphant {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      opacity: 1;
+      z-index: 100;
+    }
+
+    /* Media queries for responsiveness */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+        .icon-wrapper .icon {
+            width: 50px;
+            height: 50px;
+        }
+        .icon-label {
+            font-size: 0.6rem; /* Smaller font on mobile */
+        }
+
+        #aboutIconWrapper { top: 15%; left: 10%; }
+        #writeIconWrapper { top: 15%; right: 10%; }
+        #moonIconWrapper  { top: 40%; left: 5%; }
+        #morphIconWrapper { top: 40%; right: 5%; }
+
+        #inputBox {
+            width: 80%;
+        }
+
+        .content-panel {
+            max-height: 80vh;
+            padding: 15px;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .content-panel {
+            max-height: 70vh;
+        }
+    }
+
   </style>
 </head>
 <body>
-  <header>
-    <h1>Glyph Gate Services</h1>
-    <p class="subtitle">Where mystical meets practical — offerings from a reformed dreamgirl now grounded in goddess mode.</p>
-    <div id="ticker"></div>
-  </header>
+  <h1>The Glyph Gate</h1>
+  <input id="inputBox" placeholder="Say what you see." disabled />
 
-  <nav>
-    <a href="#consulting">Consulting</a>
-    <a href="#writing">Writing & Editing</a>
-    <a href="#readings">Tarot & Divination</a>
-    <a href="#design">Design Support</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section id="consulting">
-    <h2>🌿 Consulting Services</h2>
-    <p>Let’s untangle your digital dreams, brand voice, or spiritual strategy. Whether you're launching a movement or cleaning up an energetic mess, I’m here.</p>
-    <ul>
-      <li>Visioning & Naming</li>
-      <li>Social platform resonance & clarity mapping</li>
-      <li>Spiritual UX and identity realignment</li>
-    </ul>
-  </section>
-
-  <section id="writing">
-    <h2>🖋 Writing & Editing</h2>
-    <p>From poetic spells to grant prose, I wordsmith with intention. I shape concepts into copy that breathes.</p>
-    <ul>
-      <li>Ghostwriting for thinkers and mystics</li>
-      <li>Editing with emotional intelligence</li>
-      <li>Scripts, letters, webcopy, pitch decks</li>
-    </ul>
-  </section>
-
-  <section id="readings">
-    <h2>🔮 Tarot & Divination</h2>
-    <p>I read for clarity, compassion, and catalytic joy. Sessions available via email, voice memo, or live Zoom.</p>
-    <ul>
-      <li>Butterfly Chat™ — AI-enhanced tarot</li>
-      <li>Love, career, path, and portal work</li>
-      <li>Custom rituals and affirmation scripts</li>
-    </ul>
-  </section>
-
-  <section id="design">
-    <h2>🎨 Design Support</h2>
-    <p>I collaborate with beauty-forward brains on UI/UX, personal site builds, and soft mystic aesthetics.</p>
-    <ul>
-      <li>Custom portfolio and personal sites (via Vercel or Replit)</li>
-      <li>SVGs, glyphs, brand sigils</li>
-      <li>HTML/CSS magic for alt-princesses</li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h2>📬 Contact & Bookings</h2>
-    <p>Send love <a href="www.love.alexislindsay.com">via portal</a> to request a session, quote, or cosmic chat.</p>
-    <p>Payments and gifts via Stripe, PayPal, Zelle, CashApp, Ko-fi,  or bartered secrets. 🪽</p>
-  </section>
-
-  <div class="container">
-    <p><a href="https://www.alexislindsay.com/">Return to the Glyph Gate</a></p>
+  <div id="aboutIconWrapper" class="icon-wrapper">
+    <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">About Me</span>
+    </div>
+  </div>
+  <div id="writeIconWrapper" class="icon-wrapper">
+    <img id="writeIcon" class="icon" src="butterfiles.png" alt="Butterflies" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">My Writing</span>
+    </div>
+  </div>
+  <div id="moonIconWrapper" class="icon-wrapper">
+    <img id="moonIcon" class="icon" src="moon.png" alt="Moon Funnel" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Lunar Quiz</span>
+    </div>
+  </div>
+  <div id="morphIconWrapper" class="icon-wrapper">
+    <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Morph</span>
+    </div>
   </div>
 
+  <div id="aboutSection" class="content-panel">
+    <img src="1.jpg" alt="About Slide 1" style="max-width:100%; margin-bottom:10px;" />
+    <img src="2.jpg" alt="About Slide 2" style="max-width:100%; margin-bottom:10px;" />
+    <img src="3.jpg" alt="About Slide 3" style="max-width:100%; margin-bottom:10px;" />
+    <img src="4.jpg" alt="About Slide 4" style="max-width:100%;" />
+  </div>
+
+  <div id="writingSection" class="content-panel">
+    <p>🦋 Capstone on social media, authenticity, and leadership</p>
+    <p>🦋 Trecces Project</p>
+    <p>🦋 Writing Sample 1</p>
+    <p>🦋 Eisner Disney Case Study</p>
+    <p>🦋 Clipboard Health Case Study</p>
+  </div>
+
+  <div id="elphant">🐘</div>
+
   <script>
-    function updateTicker() {
-      const now = new Date();
-      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      document.getElementById('ticker').textContent = now.toLocaleDateString('en-US', options);
+    const input = document.getElementById("inputBox");
+    const aboutSection = document.getElementById("aboutSection");
+    const writingSection = document.getElementById("writingSection");
+    const contentPanels = document.querySelectorAll(".content-panel");
+
+    function typeText(text, cb) {
+      input.value = "";
+      let i = 0;
+      const iv = setInterval(() => {
+        input.value += text[i++];
+        if (i === text.length) {
+          clearInterval(iv);
+          setTimeout(cb, 800);
+        }
+      }, 100);
     }
-    updateTicker();
-    setInterval(updateTicker, 1000);
+
+    function closeAllPanels() {
+      contentPanels.forEach(panel => {
+        panel.classList.remove("visible");
+      });
+    }
+
+    document.getElementById("aboutIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I see you", () => {
+        aboutSection.classList.add("visible");
+        input.value = ""; // Clear after showing panel
+      });
+    };
+
+    document.getElementById("writeIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I see it", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://butterfiles.alexislindsay.com/";
+      });
+    };
+
+    document.getElementById("moonIconWrapper").onclick = () => {
+      typeText("I remember", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://lunarquiz.carrd.co/";
+      });
+    };
+
+    document.getElementById("morphIconWrapper").onclick = () => {
+      typeText("I begin", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://moon-ui-divination-portal.vercel.app/";
+      });
+    };
+
+    document.getElementById("elphant").onclick = () => {
+      input.value = "";
+      closeAllPanels();
+    };
+
+    // Ensure labels display even if JavaScript is disabled
+
+
   </script>
 </body>
 </html>
