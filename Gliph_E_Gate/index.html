@@ -25,12 +25,6 @@
     }
 
 
-    /* Position for existing Manifestations glyph */
-    #manifestIconWrapper {
-      top: 60%;
-      left: 45%;
-    }
-
     /* Position for new top-centered Manifestations glyph */
     #manifestTopIconWrapper {
       top: 5%;
@@ -222,14 +216,7 @@
             font-size: 0.6rem; /* Smaller font on mobile */
         }
 
-        #aboutIconWrapper { top: 15%; left: 10%; }
-        #writeIconWrapper { top: 15%; right: 10%; }
-        #moonIconWrapper  { top: 40%; left: 5%; }
-        #morphIconWrapper { top: 40%; right: 5%; }
-
-        #inputBox {
-            width: 80%;
-        }
+  <input id="inputBox" placeholder="Say what you see." disabled />  </div>
 
         .content-panel {
             max-height: 80vh;
@@ -338,12 +325,6 @@
       overflow-y: auto;
       scroll-behavior: smooth;
 
-      background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
-
-main
-      padding: 20px;
-      border-radius: 10px;
-      box-sizing: border-box;
       position: absolute;
       top: 50%; /* Centered vertically */
       left: 50%; /* Centered horizontally */
