@@ -24,6 +24,7 @@
       margin-bottom: 20px;
     }
 
+
     /* Position for existing Manifestations glyph */
     #manifestIconWrapper {
       top: 60%;
@@ -242,11 +243,199 @@
         }
     }
 
+
+    #inputBox {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1.1rem;
+      width: 300px;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.25);
+      color: white;
+      z-index: 50; /* Ensure it's above other elements but below modals */
+      position: relative; /* Needed for z-index to work */
+    }
+
+    /* Container for the icon and its label */
+    .icon-wrapper { /* Changed from icon-container to avoid confusion with CSS rules */
+      position: absolute;
+      width: 100px; /* Increased to give more room for text */
+      height: 100px; /* Increased to give more room for text */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .icon-wrapper .icon {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-label-wrapper {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 120px;
+      text-align: center;
+      pointer-events: none; /* Allows clicks to pass through to the icon */
+      z-index: 3; /* Ensure text is above the icon */
+    }
+
+    .icon-label {
+      position: relative;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 1);
+ 9tw6pp-codex/update-index-page-elements-display
+      opacity: 1; /* Always visible */
+
+      transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
+    }
+
+    .icon-wrapper:hover .icon-label {
+        opacity: 1; /* Show on hover */
+ main
+    }
+
+    /* Animation for the floating icons */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Positions for the icon wrappers */
+    #aboutIconWrapper  { top: 10%; left: 20%; }
+    #writeIconWrapper  { top: 10%; right: 20%; }
+    #moonIconWrapper   { top: 30%; left: 10%; }
+    #morphIconWrapper  { top: 30%; right: 10%; }
+
+
+    /* =======================================
+      Both panels: hidden by default, then
+      fade+slide in when `.visible` is added
+      ======================================= */
+    .content-panel {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -45%) scale(0.9); /* Slightly scaled down, moved up a bit */
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      max-height: 125vh;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+
+      background: rgba(0, 0, 0, 1); /* Fully opaque so underlying text doesn't show */
+
+main
+      padding: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%; /* Centered vertically */
+      left: 50%; /* Centered horizontally */
+      z-index: 60; /* Above the input box so it's fully covered */
+    }
+
+    .content-panel.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1); /* Centered and full size */
+    }
+
+    /* Specific height adjustments if needed, but max-height is usually better */
+    #aboutSection {
+        /* max-height: 125vh; is already set in .content-panel */
+    }
+
+    #writingSection {
+        /* max-height: 125vh; is already set in .content-panel */
+        /* You mentioned moving it up, but centering it usually aligns it well.
+           If you still want it slightly higher than center, adjust top: 45% or similar */
+        /* top: 45%; */ /* Example if you want it slightly higher than perfect center */
+    }
+
+
+    /* Optional custom scrollbar styling */
+    .content-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    .content-panel::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.3);
+    }
+    .content-panel::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.6);
+      border-radius: 4px;
+    }
+
+    #elphant {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 1.5rem;
+      opacity: 1;
+      z-index: 100;
+    }
+
+    /* Media queries for responsiveness */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+        .icon-wrapper .icon {
+            width: 50px;
+            height: 50px;
+        }
+        .icon-label {
+            font-size: 0.6rem; /* Smaller font on mobile */
+        }
+
+        #aboutIconWrapper { top: 15%; left: 10%; }
+        #writeIconWrapper { top: 15%; right: 10%; }
+        #moonIconWrapper  { top: 40%; left: 5%; }
+        #morphIconWrapper { top: 40%; right: 5%; }
+
+        #inputBox {
+            width: 80%;
+        }
+
+        .content-panel {
+            max-height: 80vh;
+            padding: 15px;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .content-panel {
+            max-height: 70vh;
+        }
+    }
+
+
   </style>
 </head>
 <body>
   <h1>The Glyph Gate</h1>
   <input id="inputBox" placeholder="Say what you see." disabled />
+
 
   <div id="manifestTopIconWrapper" class="icon-wrapper">
     <img id="manifestTopIcon" class="icon manifestation-glyph" src="manifestations.png" alt="Manifestations" />
@@ -254,6 +443,7 @@
       <span class="icon-label">Manifestations</span>
     </div>
   </div>
+
 
   <div id="aboutIconWrapper" class="icon-wrapper">
     <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
@@ -278,12 +468,14 @@
     <div class="icon-label-wrapper">
       <span class="icon-label">Morph</span>
     </div>
+
   </div>
   <div id="manifestIconWrapper" class="icon-wrapper">
     <img id="manifestIcon" class="icon manifestation-glyph" src="manifestations.png" alt="Manifestations" />
     <div class="icon-label-wrapper">
       <span class="icon-label">Manifestations</span>
     </div>
+
   </div>
 
   <div id="aboutSection" class="content-panel">
@@ -357,6 +549,7 @@
       });
     };
 
+
     document.getElementById("elphant").onclick = () => {
       input.value = "";
       closeAllPanels();
@@ -376,6 +569,16 @@
         window.location.href = "https://www.alexislindsay.shop/";
       });
     };
+
+
+    document.getElementById("elphant").onclick = () => {
+      input.value = "";
+      closeAllPanels();
+    };
+
+    // Ensure labels display even if JavaScript is disabled
+
+
 
   </script>
 </body>
