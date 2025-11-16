@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd sendlove-app && npm run build",
-  "outputDirectory": "sendlove-app/.next",
-  "framework": "nextjs",
-  "installCommand": "cd sendlove-app && npm install"
-}
