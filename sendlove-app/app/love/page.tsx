@@ -103,6 +103,9 @@ export default function LovePage() {
   const [mode, setMode] = useState<"money" | "words" | "gifts" | null>(null)
   const [message, setMessage] = useState("")
   const [amount, setAmount] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [bookingRequest, setBookingRequest] = useState(false)
   const [glyphSeed, setGlyphSeed] = useState(Math.random() * 1000)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showGlyph, setShowGlyph] = useState(false)
@@ -110,6 +113,30 @@ export default function LovePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    try {
+      // Send form data to API
+      const response = await fetch('/api/send-love', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          amount,
+          message,
+          bookingRequest,
+          mode
+        })
+      })
+
+      const data = await response.json()
+
+      if (!data.success) {
+        console.error('Failed to send love:', data.message)
+      }
+    } catch (error) {
+      console.error('Error sending love:', error)
+    }
 
     const newSeed = Date.now() + Math.random() * 1000
     setGlyphSeed(newSeed)
@@ -122,6 +149,9 @@ export default function LovePage() {
       setMode(null)
       setMessage("")
       setAmount("")
+      setName("")
+      setEmail("")
+      setBookingRequest(false)
       setShowGlyph(false)
     }, 4000)
   }
@@ -134,6 +164,19 @@ export default function LovePage() {
           <FloatingElements />
         </Canvas>
       </div>
+
+      {/* Cocco Orseta sheer overlay for money mode */}
+      {mode === "money" && (
+        <div className="fixed inset-0 z-0">
+          <Image
+            src="/coccoOrseta.jpg"
+            alt="Cocco Orseta"
+            fill
+            className="object-cover opacity-15"
+            priority
+          />
+        </div>
+      )}
 
       {/* Subtle glow overlay */}
       <div className="fixed inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_40%,rgba(236,72,153,0.1),transparent_60%)]" />
@@ -223,17 +266,65 @@ export default function LovePage() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {mode === "money" && (
-                  <div>
-                    <label className="block text-lg font-medium mb-3 text-purple-800">Amount</label>
-                    <Input
-                      type="number"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      placeholder="Enter amount..."
-                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
-                      required
-                    />
-                  </div>
+                  <>
+                    <div>
+                      <label className="block text-lg font-medium mb-3 text-purple-800">Your Name</label>
+                      <Input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter your name..."
+                        className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-lg font-medium mb-3 text-purple-800">Your Email</label>
+                      <Input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-lg font-medium mb-3 text-purple-800">Amount</label>
+                      <Input
+                        type="number"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        placeholder="Enter amount..."
+                        className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-lg font-medium mb-3 text-purple-800">Message (Optional)</label>
+                      <Textarea
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Add a message or booking request..."
+                        className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl min-h-32 focus:border-purple-500"
+                      />
+                    </div>
+                    <div className="flex items-center gap-3 bg-purple-50/60 p-4 rounded-2xl border border-purple-200/50">
+                      <input
+                        type="checkbox"
+                        id="booking"
+                        checked={bookingRequest}
+                        onChange={(e) => setBookingRequest(e.target.checked)}
+                        className="w-5 h-5 rounded border-purple-300 text-purple-600 focus:ring-purple-500"
+                      />
+                      <label htmlFor="booking" className="text-lg text-purple-800 cursor-pointer">
+                        This is a booking request
+                      </label>
+                    </div>
+                    <div className="text-sm text-slate-600 bg-pink-50/60 p-4 rounded-2xl border border-pink-200/50">
+                      💕 CashApp: <span className="font-semibold">$coccoOrseta</span>
+                    </div>
+                  </>
                 )}
 
                 {mode === "words" && (
