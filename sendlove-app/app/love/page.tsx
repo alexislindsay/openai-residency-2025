@@ -139,40 +139,40 @@ export default function LovePage() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-slate-900 via-purple-900 to-rose-950">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-pink-50 via-purple-50 to-rose-50">
       {/* Background Canvas */}
-      <div className="fixed inset-0 opacity-25">
+      <div className="fixed inset-0 opacity-15">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <FloatingElements />
         </Canvas>
       </div>
 
-      {/* Magenta glow overlay */}
-      <div className="fixed inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_40%,rgba(236,72,153,0.3),transparent_50%)]" />
-      <div className="fixed inset-0 opacity-8 bg-[radial-gradient(circle_at_70%_60%,rgba(219,39,119,0.2),transparent_50%)]" />
+      {/* Subtle glow overlay */}
+      <div className="fixed inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_40%,rgba(236,72,153,0.1),transparent_60%)]" />
+      <div className="fixed inset-0 opacity-15 bg-[radial-gradient(circle_at_70%_60%,rgba(168,85,247,0.1),transparent_60%)]" />
 
       {/* Floating Decorative Elements */}
       <FloatingIcon className="top-24 left-24" style={{ animationDelay: "0s" }}>
-        <div className="w-14 h-14 rounded-full bg-magenta-800/30 backdrop-blur-sm border border-magenta-500/40 flex items-center justify-center">
-          <Heart className="w-7 h-7 text-magenta-300" />
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-200/50 to-rose-300/50 backdrop-blur-md shadow-lg flex items-center justify-center">
+          <Heart className="w-8 h-8 text-pink-600" />
         </div>
       </FloatingIcon>
 
       <FloatingIcon className="top-40 right-28" style={{ animationDelay: "1.5s" }}>
-        <div className="w-10 h-10 rounded-full bg-pink-800/25 backdrop-blur-sm border border-pink-500/35 flex items-center justify-center">
-          <Star className="w-5 h-5 text-pink-300" />
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200/50 to-violet-300/50 backdrop-blur-md shadow-lg flex items-center justify-center">
+          <Star className="w-6 h-6 text-purple-600" />
         </div>
       </FloatingIcon>
 
       <FloatingIcon className="bottom-32 left-20" style={{ animationDelay: "3s" }}>
-        <div className="w-16 h-16 rounded-full bg-rose-800/20 backdrop-blur-sm border border-rose-500/30 flex items-center justify-center">
-          <Sparkles className="w-8 h-8 text-rose-300" />
+        <div className="w-18 h-18 rounded-full bg-gradient-to-br from-rose-200/50 to-pink-300/50 backdrop-blur-md shadow-lg flex items-center justify-center">
+          <Sparkles className="w-9 h-9 text-rose-600" />
         </div>
       </FloatingIcon>
 
       <FloatingIcon className="top-1/2 right-16" style={{ animationDelay: "0.8s" }}>
-        <div className="w-12 h-12 rounded-full bg-fuchsia-700/25 backdrop-blur-sm border border-fuchsia-500/35 flex items-center justify-center">
-          <Gift className="w-6 h-6 text-fuchsia-300" />
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-fuchsia-200/50 to-purple-300/50 backdrop-blur-md shadow-lg flex items-center justify-center">
+          <Gift className="w-7 h-7 text-fuchsia-600" />
         </div>
       </FloatingIcon>
 
@@ -180,14 +180,14 @@ export default function LovePage() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="mb-4">
-            <p className="text-2xl md:text-3xl font-light text-magenta-200/80 mb-2">send</p>
-            <h1 className="text-7xl md:text-9xl font-serif font-bold text-transparent bg-gradient-to-r from-magenta-300 via-pink-200 to-rose-300 bg-clip-text drop-shadow-2xl">
+            <p className="text-2xl md:text-3xl font-light text-purple-600/70 mb-2">send</p>
+            <h1 className="text-7xl md:text-9xl font-serif font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-rose-600 bg-clip-text text-transparent drop-shadow-sm">
               LOVE
             </h1>
           </div>
-          <p className="text-lg md:text-xl text-magenta-100/80 font-light mb-2">through</p>
-          <h2 className="text-3xl md:text-4xl font-serif text-white/90 mb-8">The Glyph Gate</h2>
-          <p className="text-lg md:text-xl text-purple-100/80 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg md:text-xl text-purple-500/70 font-light mb-2">through</p>
+          <h2 className="text-3xl md:text-4xl font-serif text-purple-700 mb-8">The Glyph Gate</h2>
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
             A portal for transmitting love in all its forms—monetary, emotional, physical. Each gesture becomes a unique
             glyph in our constellation of connection.
           </p>
@@ -197,41 +197,41 @@ export default function LovePage() {
         {!mode && !showGlyph && (
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card
-              className="bg-slate-900/40 backdrop-blur-lg border border-magenta-500/30 hover:bg-slate-800/50 hover:border-magenta-400/50 transition-all cursor-pointer group shadow-2xl"
+              className="bg-white/70 backdrop-blur-lg border border-pink-200/50 hover:bg-white/80 hover:border-pink-300/70 hover:shadow-xl transition-all cursor-pointer group shadow-lg rounded-3xl"
               onClick={() => setMode("money")}
             >
               <CardContent className="p-10 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-magenta-600 to-pink-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                  <DollarSign className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                  <DollarSign className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3 text-white">Send Love</h3>
-                <p className="text-magenta-200/80 text-lg">Through monetary energy</p>
+                <h3 className="text-2xl font-semibold mb-3 text-purple-800">Send Love</h3>
+                <p className="text-slate-600 text-lg">Through monetary energy</p>
               </CardContent>
             </Card>
 
             <Card
-              className="bg-slate-900/40 backdrop-blur-lg border border-magenta-500/30 hover:bg-slate-800/50 hover:border-magenta-400/50 transition-all cursor-pointer group shadow-2xl"
+              className="bg-white/70 backdrop-blur-lg border border-purple-200/50 hover:bg-white/80 hover:border-purple-300/70 hover:shadow-xl transition-all cursor-pointer group shadow-lg rounded-3xl"
               onClick={() => setMode("words")}
             >
               <CardContent className="p-10 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-600 to-rose-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                  <Heart className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                  <Heart className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3 text-white">Send Love</h3>
-                <p className="text-magenta-200/80 text-lg">Through words & feelings</p>
+                <h3 className="text-2xl font-semibold mb-3 text-purple-800">Send Love</h3>
+                <p className="text-slate-600 text-lg">Through words & feelings</p>
               </CardContent>
             </Card>
 
             <Card
-              className="bg-slate-900/40 backdrop-blur-lg border border-magenta-500/30 hover:bg-slate-800/50 hover:border-magenta-400/50 transition-all cursor-pointer group shadow-2xl"
+              className="bg-white/70 backdrop-blur-lg border border-rose-200/50 hover:bg-white/80 hover:border-rose-300/70 hover:shadow-xl transition-all cursor-pointer group shadow-lg rounded-3xl"
               onClick={() => setMode("gifts")}
             >
               <CardContent className="p-10 text-center">
-                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-br from-rose-600 to-fuchsia-700 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                  <Gift className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                  <Gift className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-3 text-white">Send Love</h3>
-                <p className="text-magenta-200/80 text-lg">Through physical gifts</p>
+                <h3 className="text-2xl font-semibold mb-3 text-purple-800">Send Love</h3>
+                <p className="text-slate-600 text-lg">Through physical gifts</p>
               </CardContent>
             </Card>
           </div>
@@ -239,17 +239,17 @@ export default function LovePage() {
 
         {/* Form Interface */}
         {mode && !showGlyph && (
-          <Card className="max-w-2xl mx-auto bg-slate-900/50 backdrop-blur-xl border border-magenta-500/40 shadow-2xl">
+          <Card className="max-w-2xl mx-auto bg-white/70 backdrop-blur-xl border border-purple-200/50 shadow-xl rounded-3xl">
             <CardContent className="p-10">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-magenta-600 to-pink-700 flex items-center justify-center shadow-lg">
-                  {mode === "money" && <DollarSign className="w-6 h-6 text-white" />}
-                  {mode === "words" && <Heart className="w-6 h-6 text-white" />}
-                  {mode === "gifts" && <Gift className="w-6 h-6 text-white" />}
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center shadow-lg">
+                  {mode === "money" && <DollarSign className="w-8 h-8 text-white" />}
+                  {mode === "words" && <Heart className="w-8 h-8 text-white" />}
+                  {mode === "gifts" && <Gift className="w-8 h-8 text-white" />}
                 </div>
-                <h2 className="text-3xl font-semibold text-white">
+                <h2 className="text-3xl font-semibold text-purple-800">
                   Send Love
-                  <span className="text-lg font-light text-magenta-200/80 block">
+                  <span className="text-lg font-light text-purple-600/80 block">
                     {mode === "money" && "through value"}
                     {mode === "words" && "through words"}
                     {mode === "gifts" && "through gifts"}
@@ -260,13 +260,13 @@ export default function LovePage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {mode === "money" && (
                   <div>
-                    <label className="block text-lg font-medium mb-3 text-magenta-100">Amount</label>
+                    <label className="block text-lg font-medium mb-3 text-purple-800">Amount</label>
                     <Input
                       type="number"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder="Enter amount..."
-                      className="bg-slate-800/50 backdrop-blur-sm border-magenta-500/40 text-white placeholder-magenta-300/60 text-lg p-4 rounded-xl focus:border-magenta-400"
+                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
                       required
                     />
                   </div>
@@ -274,12 +274,12 @@ export default function LovePage() {
 
                 {mode === "words" && (
                   <div>
-                    <label className="block text-lg font-medium mb-3 text-magenta-100">Your Love Message</label>
+                    <label className="block text-lg font-medium mb-3 text-purple-800">Your Love Message</label>
                     <Textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Express your love..."
-                      className="bg-slate-800/50 backdrop-blur-sm border-magenta-500/40 text-white placeholder-magenta-300/60 text-lg p-4 rounded-xl min-h-32 focus:border-magenta-400"
+                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl min-h-32 focus:border-purple-500"
                       required
                     />
                   </div>
@@ -287,9 +287,9 @@ export default function LovePage() {
 
                 {mode === "gifts" && (
                   <div className="space-y-6">
-                    <div className="text-magenta-100/90 text-lg">
+                    <div className="text-slate-700 text-lg">
                       <p className="mb-4">Send love through physical gifts:</p>
-                      <div className="space-y-2 text-base bg-slate-800/30 p-4 rounded-xl border border-magenta-500/20">
+                      <div className="space-y-2 text-base bg-purple-50/60 p-6 rounded-2xl border border-purple-200/50">
                         <div>💝 Curated love wishlist (provided after sending)</div>
                         <div>💎 Digital tokens of affection</div>
                         <div>📦 Physical love packages (upon request)</div>
@@ -299,7 +299,7 @@ export default function LovePage() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Describe your gift of love..."
-                      className="bg-slate-800/50 backdrop-blur-sm border-magenta-500/40 text-white placeholder-magenta-300/60 text-lg p-4 rounded-xl focus:border-magenta-400"
+                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
                     />
                   </div>
                 )}
@@ -309,14 +309,14 @@ export default function LovePage() {
                     type="button"
                     variant="outline"
                     onClick={() => setMode(null)}
-                    className="border-magenta-500/50 text-magenta-200 hover:bg-magenta-800/30 backdrop-blur-sm text-lg px-6 py-3 rounded-xl"
+                    className="border-purple-300 text-purple-700 hover:bg-purple-50 backdrop-blur-sm text-lg px-6 py-3 rounded-full"
                   >
                     Back
                   </Button>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-gradient-to-r from-magenta-600 to-pink-700 hover:from-magenta-700 hover:to-pink-800 text-white text-lg px-8 py-3 rounded-xl flex-1 shadow-lg"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-lg px-10 py-3 rounded-full flex-1 shadow-lg hover:shadow-xl transition-all"
                   >
                     {isSubmitting ? (
                       <>
@@ -339,16 +339,16 @@ export default function LovePage() {
         {/* Glyph Generation Display */}
         {showGlyph && (
           <div className="text-center">
-            <h2 className="text-4xl font-semibold mb-8 text-white">Love Sent ✨</h2>
-            <div className="w-80 h-80 mx-auto mb-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-magenta-500/40 shadow-2xl">
+            <h2 className="text-4xl font-semibold mb-8 text-purple-800">Love Sent ✨</h2>
+            <div className="w-80 h-80 mx-auto mb-8 rounded-3xl bg-white/70 backdrop-blur-xl border border-purple-200/50 shadow-xl">
               <Canvas camera={{ position: [0, 0, 3] }}>
                 <LoveGlyph seed={glyphSeed} intensity={4} />
               </Canvas>
             </div>
-            <div className="bg-slate-900/50 backdrop-blur-xl rounded-2xl p-8 max-w-lg mx-auto border border-magenta-500/40">
-              <p className="text-magenta-100 text-xl mb-4">Your love has been encoded as</p>
-              <p className="text-2xl font-semibold text-magenta-300 mb-4">Love Glyph #{Math.floor(glyphSeed)}</p>
-              <p className="text-magenta-200/80">
+            <div className="bg-white/70 backdrop-blur-xl rounded-3xl p-8 max-w-lg mx-auto border border-purple-200/50 shadow-lg">
+              <p className="text-purple-700 text-xl mb-4">Your love has been encoded as</p>
+              <p className="text-2xl font-semibold text-purple-800 mb-4">Love Glyph #{Math.floor(glyphSeed)}</p>
+              <p className="text-slate-600">
                 This unique glyph now exists in our constellation of love. Connection details will arrive shortly. 💕
               </p>
             </div>
@@ -356,11 +356,11 @@ export default function LovePage() {
         )}
 
         {/* Footer */}
-        <div className="text-center mt-20 text-magenta-300/70">
+        <div className="text-center mt-20 text-slate-500">
           <p className="text-lg mb-2">All love transmissions are handled with care and privacy</p>
           <p className="mb-6">Each love glyph is procedurally generated and completely unique</p>
           <p>
-            <a href="/" className="hover:text-magenta-200 transition-colors text-lg underline decoration-magenta-400">
+            <a href="/" className="hover:text-purple-600 transition-colors text-lg underline decoration-purple-400">
               ← Return to Glyph Gate
             </a>
           </p>

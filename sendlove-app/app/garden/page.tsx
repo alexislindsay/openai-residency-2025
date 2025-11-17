@@ -99,22 +99,22 @@ export default function GardenPage() {
 
   if (!hasAccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-indigo-950 flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 flex items-center justify-center relative overflow-hidden">
         {/* Floating decorative elements */}
         <div className="absolute top-24 left-24 animate-float">
-          <Heart className="w-10 h-10 text-purple-400/40" />
+          <Heart className="w-12 h-12 text-purple-400" />
         </div>
         <div className="absolute top-48 right-32 animate-float" style={{ animationDelay: "1s" }}>
-          <Star className="w-7 h-7 text-indigo-400/40" />
+          <Star className="w-9 h-9 text-indigo-500" />
         </div>
         <div className="absolute bottom-40 left-32 animate-float" style={{ animationDelay: "2s" }}>
-          <Sparkles className="w-8 h-8 text-violet-400/40" />
+          <Sparkles className="w-10 h-10 text-violet-500" />
         </div>
 
         <div className="max-w-md w-full p-8">
-          <div className="bg-slate-900/60 backdrop-blur-xl rounded-3xl p-10 border border-purple-500/40 shadow-2xl">
-            <h1 className="text-4xl font-serif font-bold text-center mb-8 text-white">The Constellation</h1>
-            <p className="text-purple-100/90 text-center mb-8 text-lg leading-relaxed">
+          <div className="bg-white/70 backdrop-blur-xl rounded-3xl p-10 border border-purple-200/50 shadow-xl">
+            <h1 className="text-4xl font-serif font-bold text-center mb-8 text-purple-800">The Constellation</h1>
+            <p className="text-slate-600 text-center mb-8 text-lg leading-relaxed">
               This sacred space contains the collective sigils of all transmissions. Access requires coordinates
               provided after your first transmission through the portal.
             </p>
@@ -124,17 +124,17 @@ export default function GardenPage() {
                 value={accessCode}
                 onChange={(e) => setAccessCode(e.target.value)}
                 placeholder="Enter access coordinates..."
-                className="bg-slate-800/50 backdrop-blur-sm border-purple-500/40 text-white placeholder-purple-300/60 text-lg p-4 rounded-xl focus:border-purple-400"
+                className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
               />
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white text-lg py-3 rounded-xl shadow-lg"
+                className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white text-lg py-4 rounded-full shadow-lg hover:shadow-xl transition-all"
               >
                 Enter Constellation
               </Button>
             </form>
-            <p className="text-center mt-8 text-purple-300/70">
-              <a href="/love" className="hover:text-purple-200 transition-colors underline decoration-purple-400">
+            <p className="text-center mt-8 text-slate-500">
+              <a href="/love" className="hover:text-purple-600 transition-colors underline decoration-purple-400">
                 ← Return to Portal
               </a>
             </p>
@@ -157,12 +157,12 @@ export default function GardenPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-indigo-950 relative overflow-hidden">
-      <div className="fixed inset-0">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+      <div className="fixed inset-0 opacity-40">
         <Canvas camera={{ position: [0, 0, 14], fov: 75 }}>
-          <ambientLight intensity={0.3} />
-          <pointLight position={[12, 12, 12]} intensity={0.4} color="#8b5cf6" />
-          <pointLight position={[-12, -12, 12]} intensity={0.4} color="#6366f1" />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[12, 12, 12]} intensity={0.6} color="#a78bfa" />
+          <pointLight position={[-12, -12, 12]} intensity={0.6} color="#818cf8" />
           {glyphs.map((glyph) => (
             <ConstellationGlyph key={glyph.id} seed={glyph.seed} position={glyph.position} scale={glyph.scale} />
           ))}
@@ -171,13 +171,13 @@ export default function GardenPage() {
 
       <div className="relative z-10 p-8">
         <div className="text-center">
-          <div className="bg-slate-900/60 backdrop-blur-xl rounded-3xl p-10 max-w-2xl mx-auto border border-purple-500/40 shadow-2xl">
-            <h1 className="text-5xl font-serif font-bold mb-6 text-white">The Constellation</h1>
-            <p className="text-purple-100/90 mb-8 text-xl leading-relaxed">
+          <div className="bg-white/70 backdrop-blur-xl rounded-3xl p-10 max-w-2xl mx-auto border border-purple-200/50 shadow-xl">
+            <h1 className="text-5xl font-serif font-bold mb-6 text-purple-800">The Constellation</h1>
+            <p className="text-slate-600 mb-8 text-xl leading-relaxed">
               Each sigil represents a transmission through the portal. They drift here in eternal twilight, a living
               constellation of human intention and connection.
             </p>
-            <div className="text-lg text-purple-200/80 space-y-2">
+            <div className="text-lg text-purple-700 space-y-2">
               <p>⚡ Total Transmissions: {glyphs.length}</p>
               <p>🌙 Constellation Status: Expanding</p>
               <p>✨ New Sigils: Manifesting Nightly</p>
@@ -185,7 +185,7 @@ export default function GardenPage() {
             <p className="mt-8">
               <a
                 href="/love"
-                className="text-purple-300 hover:text-purple-200 transition-colors text-lg underline decoration-purple-400"
+                className="text-purple-600 hover:text-purple-700 transition-colors text-lg underline decoration-purple-400"
               >
                 ← Return to Portal
               </a>
