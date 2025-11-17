@@ -8,13 +8,16 @@ import { ArrowRight, Heart, Sparkles, Star } from "lucide-react"
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
-      {/* Beautiful flowers sheer overlay */}
+
+
       <div className="fixed inset-0 z-0">
         <Image
           src="/beautiful flowers.jpg"
           alt="Beautiful Flowers"
           fill
+
           className="object-cover opacity-20"
+
           priority
         />
       </div>
@@ -38,14 +41,16 @@ export default function HomePage() {
         </div>
 
         <div className="mb-8">
-          <p className="text-3xl md:text-4xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'var(--font-great-vibes)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>send</p>
-          <h1 className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-float-text" style={{ fontFamily: 'var(--font-great-vibes)', textShadow: '3px 3px 6px rgba(0,0,0,0.4)' }}>
-            LOVE
-          </h1>
+          <p className="text-2xl md:text-3xl font-bold text-purple-600 mb-2 drop-shadow-md">send</p>
+          <div className="animate-float-3d inline-block">
+            <h1 className="text-7xl md:text-9xl font-serif font-black bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent" style={{ textShadow: "0 4px 20px rgba(236, 72, 153, 0.4), 0 8px 40px rgba(168, 85, 247, 0.3)" }}>
+              LOVE
+            </h1>
+          </div>
         </div>
-        <p className="text-2xl md:text-3xl text-purple-500 font-bold mb-2" style={{ fontFamily: 'var(--font-dancing-script)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>through</p>
-        <h2 className="text-4xl md:text-5xl font-bold text-purple-700 mb-8" style={{ fontFamily: 'var(--font-dancing-script)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>The Glyph Gate</h2>
-        <p className="text-lg md:text-xl text-slate-700 mb-12 leading-relaxed font-semibold max-w-2xl mx-auto" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.2)' }}>
+        <p className="text-lg md:text-xl text-purple-600 font-bold mb-2 drop-shadow-md">through</p>
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-purple-700 mb-8 drop-shadow-lg">The Glyph Gate</h2>
+        <p className="text-lg md:text-xl text-slate-600 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
           A digital portal for transmitting love in all its forms. Each gesture becomes a glyph, each connection becomes
           constellation.
         </p>
@@ -76,7 +81,7 @@ export default function HomePage() {
           66% { transform: translateY(6px) rotate(-1deg); }
         }
 
-        @keyframes floatText {
+        @keyframes float3d {
           0%, 100% {
             transform: translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg);
           }
@@ -84,10 +89,10 @@ export default function HomePage() {
             transform: translateY(-15px) translateZ(10px) rotateX(2deg) rotateY(-3deg);
           }
           50% {
-            transform: translateY(-8px) translateZ(20px) rotateX(-2deg) rotateY(3deg);
+            transform: translateY(-8px) translateZ(-5px) rotateX(-1deg) rotateY(2deg);
           }
           75% {
-            transform: translateY(8px) translateZ(10px) rotateX(2deg) rotateY(-2deg);
+            transform: translateY(10px) translateZ(8px) rotateX(1deg) rotateY(-1deg);
           }
         }
 
@@ -95,8 +100,8 @@ export default function HomePage() {
           animation: float 8s ease-in-out infinite;
         }
 
-        .animate-float-text {
-          animation: floatText 6s ease-in-out infinite;
+        .animate-float-3d {
+          animation: float3d 6s ease-in-out infinite;
           transform-style: preserve-3d;
           perspective: 1000px;
         }
