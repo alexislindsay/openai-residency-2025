@@ -99,19 +99,6 @@ function FloatingElements() {
   )
 }
 
-// Floating Decorative Icons
-function FloatingIcon({
-  children,
-  className,
-  style,
-}: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
-  return (
-    <div className={`absolute animate-float ${className}`} style={style}>
-      {children}
-    </div>
-  )
-}
-
 export default function LovePage() {
   const [mode, setMode] = useState<"money" | "words" | "gifts" | null>(null)
   const [message, setMessage] = useState("")
@@ -152,66 +139,6 @@ export default function LovePage() {
       <div className="fixed inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_40%,rgba(236,72,153,0.1),transparent_60%)]" />
       <div className="fixed inset-0 opacity-15 bg-[radial-gradient(circle_at_70%_60%,rgba(168,85,247,0.1),transparent_60%)]" />
 
-      {/* Floating Send Love Images with Wavy Animation */}
-      <FloatingIcon className="top-24 left-24" style={{ animationDelay: "0s" }}>
-        <div className="w-32 h-32 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendlove1.jpg" alt="Send Love" width={128} height={128} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-40 right-28" style={{ animationDelay: "1.5s" }}>
-        <div className="w-28 h-28 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendLovebird.jpg" alt="Love Bird" width={112} height={112} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="bottom-32 left-20" style={{ animationDelay: "3s" }}>
-        <div className="w-36 h-36 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/beautiful flowers.jpg" alt="Beautiful Flowers" width={144} height={144} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-1/2 right-16" style={{ animationDelay: "0.8s" }}>
-        <div className="w-30 h-30 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendlovePeace.jpg" alt="Send Love Peace" width={120} height={120} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-1/3 left-16" style={{ animationDelay: "2.2s" }}>
-        <div className="w-28 h-28 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendloveChocolate.jpg" alt="Chocolate Love" width={112} height={112} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="bottom-1/4 right-32" style={{ animationDelay: "4s" }}>
-        <div className="w-32 h-32 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendloveParty.jpg" alt="Party Love" width={128} height={128} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-2/3 left-32" style={{ animationDelay: "1.2s" }}>
-        <div className="w-26 h-26 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendlove2.jpg" alt="Send Love" width={104} height={104} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-1/4 right-1/4" style={{ animationDelay: "2.8s" }}>
-        <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendlove3.jpg" alt="Send Love" width={96} height={96} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="bottom-1/3 right-1/3" style={{ animationDelay: "3.5s" }}>
-        <div className="w-28 h-28 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/sendloveRooster.jpg" alt="Rooster Love" width={112} height={112} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
-
-      <FloatingIcon className="top-3/4 right-20" style={{ animationDelay: "1.8s" }}>
-        <div className="w-30 h-30 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md border-2 border-white/30 hover:scale-110 transition-transform">
-          <Image src="/coccoOrseta.jpg" alt="Cocco Orseta" width={120} height={120} className="object-cover w-full h-full" />
-        </div>
-      </FloatingIcon>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
