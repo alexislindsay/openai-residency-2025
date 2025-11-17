@@ -8,13 +8,16 @@ import { ArrowRight, Heart, Sparkles, Star } from "lucide-react"
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
-      {/* Beautiful Flowers Sheer Overlay */}
+
+
       <div className="fixed inset-0 z-0">
         <Image
           src="/beautiful flowers.jpg"
           alt="Beautiful Flowers"
           fill
-          className="object-cover opacity-15"
+
+          className="object-cover opacity-20"
+
           priority
         />
       </div>
@@ -62,7 +65,7 @@ export default function HomePage() {
           </Link>
 
           <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 max-w-md mx-auto shadow-lg border border-purple-200/50">
-            <div className="text-purple-700 space-y-2 text-base">
+            <div className="text-purple-700 space-y-2 text-base font-bold" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.2)' }}>
               <p>Portal Status: 💕 Active</p>
               <p>Love Flow: ✨ Transmitting</p>
               <p>Constellation: 🌙 Growing</p>
