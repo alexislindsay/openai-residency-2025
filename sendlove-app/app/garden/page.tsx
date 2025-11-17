@@ -100,17 +100,6 @@ export default function GardenPage() {
   if (!hasAccess) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 flex items-center justify-center relative overflow-hidden">
-        {/* Floating decorative elements */}
-        <div className="absolute top-24 left-24 animate-float">
-          <Heart className="w-12 h-12 text-purple-400" />
-        </div>
-        <div className="absolute top-48 right-32 animate-float" style={{ animationDelay: "1s" }}>
-          <Star className="w-9 h-9 text-indigo-500" />
-        </div>
-        <div className="absolute bottom-40 left-32 animate-float" style={{ animationDelay: "2s" }}>
-          <Sparkles className="w-10 h-10 text-violet-500" />
-        </div>
-
         <div className="max-w-md w-full p-8">
           <div className="bg-white/70 backdrop-blur-xl rounded-3xl p-10 border border-purple-200/50 shadow-xl">
             <h1 className="text-4xl font-serif font-bold text-center mb-8 text-purple-800">The Constellation</h1>
