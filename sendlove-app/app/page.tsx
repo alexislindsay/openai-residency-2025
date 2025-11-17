@@ -38,13 +38,13 @@ export default function HomePage() {
         </div>
 
         <div className="mb-8">
-          <p className="text-3xl md:text-4xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'var(--font-great-vibes)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>send</p>
-          <h1 className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-float-text" style={{ fontFamily: 'var(--font-great-vibes)', textShadow: '3px 3px 6px rgba(0,0,0,0.4)' }}>
+          <p className="text-3xl md:text-4xl font-bold text-purple-600 mb-2" style={{ fontFamily: 'var(--font-allura)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>send</p>
+          <h1 className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-float-text" style={{ fontFamily: 'var(--font-pacifico)', textShadow: '3px 3px 6px rgba(0,0,0,0.4)' }}>
             LOVE
           </h1>
         </div>
-        <p className="text-2xl md:text-3xl text-purple-500 font-bold mb-2" style={{ fontFamily: 'var(--font-dancing-script)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>through</p>
-        <h2 className="text-4xl md:text-5xl font-bold text-purple-700 mb-8" style={{ fontFamily: 'var(--font-dancing-script)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>The Glyph Gate</h2>
+        <p className="text-2xl md:text-3xl text-purple-500 font-bold mb-2" style={{ fontFamily: 'var(--font-allura)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>through</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-purple-700 mb-8" style={{ fontFamily: 'var(--font-allura)', textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>The Glyph Gate</h2>
         <p className="text-lg md:text-xl text-slate-700 mb-12 leading-relaxed font-semibold max-w-2xl mx-auto" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.2)' }}>
           A digital portal for transmitting love in all its forms. Each gesture becomes a glyph, each connection becomes
           constellation.

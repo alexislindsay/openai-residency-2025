@@ -1,17 +1,18 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Great_Vibes, Dancing_Script } from "next/font/google"
+import { Inter, Pacifico, Allura } from "next/font/google"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
-const greatVibes = Great_Vibes({
+const pacifico = Pacifico({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-great-vibes"
+  variable: "--font-pacifico"
 })
-const dancingScript = Dancing_Script({
+const allura = Allura({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-dancing-script"
+  variable: "--font-allura"
 })
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${greatVibes.variable} ${dancingScript.variable}`}>{children}</body>
+      <body className={`${inter.className} ${pacifico.variable} ${allura.variable}`}>{children}</body>
     </html>
   )
 }
