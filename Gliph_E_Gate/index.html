@@ -140,7 +140,19 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
-    #contactIconWrapper { top: 60%; right: 10%; }
+    #contactIconWrapper {
+      top: 60%;
+      right: 10%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: scale(0.5);
+    }
+    #contactIconWrapper.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
 
 
     /* =======================================
@@ -321,7 +333,19 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
-    #contactIconWrapper { top: 60%; right: 10%; }
+    #contactIconWrapper {
+      top: 60%;
+      right: 10%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: scale(0.5);
+    }
+    #contactIconWrapper.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
 
 
     /* =======================================
@@ -568,6 +592,17 @@ main
     document.getElementById("elphant").onclick = () => {
       input.value = "";
       closeAllPanels();
+
+      // Toggle the contact icon - "addressing the elephant in the room"
+      const contactIcon = document.getElementById("contactIconWrapper");
+      if (contactIcon.classList.contains("visible")) {
+        contactIcon.classList.remove("visible");
+      } else {
+        typeText("I see it", () => {
+          contactIcon.classList.add("visible");
+          input.value = "";
+        });
+      }
     };
 
     // Ensure labels display even if JavaScript is disabled
@@ -583,12 +618,6 @@ main
         input.value = "";
         window.location.href = "https://www.alexislindsay.shop/";
       });
-    };
-
-
-    document.getElementById("elphant").onclick = () => {
-      input.value = "";
-      closeAllPanels();
     };
 
     // Ensure labels display even if JavaScript is disabled
