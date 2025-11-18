@@ -140,6 +140,7 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
+    #contactIconWrapper { top: 60%; right: 10%; }
 
 
     /* =======================================
@@ -320,6 +321,7 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
+    #contactIconWrapper { top: 60%; right: 10%; }
 
 
     /* =======================================
@@ -470,6 +472,12 @@ main
     </div>
 
   </div>
+  <div id="contactIconWrapper" class="icon-wrapper">
+    <img id="contactIcon" class="icon" src="sendloveCheese.jpg" alt="Contact Me" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Contact Me</span>
+    </div>
+  </div>
   <div id="manifestIconWrapper" class="icon-wrapper">
     <img id="manifestIcon" class="icon manifestation-glyph" src="manifestations.png" alt="Manifestations" />
     <div class="icon-label-wrapper">
@@ -546,6 +554,13 @@ main
       typeText("I begin", () => {
         input.value = ""; // Clear before navigating
         window.location.href = "https://moon-ui-divination-portal.vercel.app/";
+      });
+    };
+
+    document.getElementById("contactIconWrapper").onclick = () => {
+      typeText("I connect", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "/sendlove-app/";
       });
     };
 

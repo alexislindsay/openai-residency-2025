@@ -111,6 +111,12 @@ export default function LovePage() {
     e.preventDefault()
     setIsSubmitting(true)
 
+    // Handle words mode - send email
+    if (mode === "words") {
+      const mailtoLink = `mailto:lexxielyn@gmail.com?subject=Love Message from The Glyph Gate&body=${encodeURIComponent(message)}`
+      window.location.href = mailtoLink
+    }
+
     const newSeed = Date.now() + Math.random() * 1000
     setGlyphSeed(newSeed)
     setShowGlyph(true)
@@ -223,16 +229,36 @@ export default function LovePage() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {mode === "money" && (
-                  <div>
-                    <label className="block text-lg font-medium mb-3 text-purple-800">Amount</label>
-                    <Input
-                      type="number"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      placeholder="Enter amount..."
-                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
-                      required
-                    />
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-lg font-medium mb-3 text-purple-800">Choose Payment Method</label>
+                      <div className="space-y-3">
+                        <a
+                          href="https://wise.com/pay/me/alexisl123"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          💳 Send via Wise
+                        </a>
+                        <a
+                          href="https://cash.app/$lexxielyn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          💵 Send via CashApp
+                        </a>
+                        <a
+                          href="https://venmo.com/lexxielyn"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          💙 Send via Venmo
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -253,18 +279,20 @@ export default function LovePage() {
                   <div className="space-y-6">
                     <div className="text-slate-700 text-lg">
                       <p className="mb-4">Send love through physical gifts:</p>
-                      <div className="space-y-2 text-base bg-purple-50/60 p-6 rounded-2xl border border-purple-200/50">
-                        <div>💝 Curated love wishlist (provided after sending)</div>
-                        <div>💎 Digital tokens of affection</div>
-                        <div>📦 Physical love packages (upon request)</div>
+                      <a
+                        href="https://www.amazon.com/hz/wishlist/ls/YOUR_WISHLIST_ID"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                      >
+                        🎁 View Amazon Wishlist
+                      </a>
+                      <div className="mt-4 space-y-2 text-base bg-purple-50/60 p-6 rounded-2xl border border-purple-200/50">
+                        <div>💝 Curated items selected with love</div>
+                        <div>📦 Items ship directly from Amazon</div>
+                        <div>✨ Each gift brings a smile</div>
                       </div>
                     </div>
-                    <Textarea
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Describe your gift of love..."
-                      className="bg-white/80 backdrop-blur-sm border-purple-300/50 text-slate-800 placeholder-purple-400/60 text-lg p-4 rounded-2xl focus:border-purple-500"
-                    />
                   </div>
                 )}
 
