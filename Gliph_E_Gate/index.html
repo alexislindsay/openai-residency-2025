@@ -141,6 +141,7 @@
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
     #contactIconWrapper { top: 60%; right: 10%; }
+    #spotHumanIconWrapper { top: 60%; left: 10%; }
 
 
     /* =======================================
@@ -322,6 +323,7 @@
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
     #contactIconWrapper { top: 60%; right: 10%; }
+    #spotHumanIconWrapper { top: 60%; left: 10%; }
 
 
     /* =======================================
@@ -478,6 +480,12 @@ main
       <span class="icon-label">Contact Me</span>
     </div>
   </div>
+  <div id="spotHumanIconWrapper" class="icon-wrapper">
+    <img id="spotHumanIcon" class="icon" src="moon.png" alt="Spot the Human" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Spot the Human</span>
+    </div>
+  </div>
   <div id="manifestIconWrapper" class="icon-wrapper">
     <img id="manifestIcon" class="icon manifestation-glyph" src="manifestations.png" alt="Manifestations" />
     <div class="icon-label-wrapper">
@@ -564,6 +572,12 @@ main
       });
     };
 
+    document.getElementById("spotHumanIconWrapper").onclick = () => {
+      typeText("I question", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "spot-the-human.html";
+      });
+    };
 
     document.getElementById("elphant").onclick = () => {
       input.value = "";
