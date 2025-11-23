@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spot the Human</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Lucide vanilla JS build -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel" data-presets="react">
+        const Icon = ({ name, size = 32, color = "currentColor", className = "" }) => {
+            const svg = lucide.icons[name].toSvg({ width: size, height: size, stroke: color, class: className });
+            return <span dangerouslySetInnerHTML={{ __html: svg }} />;
+        };
+
+        const SpotTheHumanGame = () => {
+            const [gameState, setGameState] = React.useState('start'); // start, playing, result
+            const [currentQuestion, setCurrentQuestion] = React.useState('');
+            const [responses, setResponses] = React.useState([]);
+            const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+            const [correctAnswer, setCorrectAnswer] = React.useState(null);
+            const [explanation, setExplanation] = React.useState('');
+            const [score, setScore] = React.useState(0);
+            const [round, setRound] = React.useState(0);
+
+            const gameScenarios = [
+                {
+                    question: "What's your biggest turn-off on a first date?",
+                    responses: [
+                        "When someone is constantly on their phone or talks only about themselves. I once had a date where the guy answered three work calls during dinner!",
+                        "Individuals who demonstrate a lack of basic courtesy toward service staff, as this reflects poorly on their character and empathy levels.",
+                        "Poor hygiene and rudeness to waitstaff are immediate red flags that indicate incompatibility with my values.",
+                        "Honestly? When they show up late without texting and then spend the whole time complaining about their ex. Like, I'm right here!"
+                    ],
+                    human: 0,
+                    explanation: "Response 1 is the most human. It's specific, personal, and includes a relatable anecdote."
+                },
+                {
+                    question: "Describe your perfect lazy Sunday morning.",
+                    responses: [
+                        "I would engage in restorative activities such as reading literature while consuming a warm beverage, followed by light physical exercise.",
+                        "Coffee in bed, scrolling through my phone for way too long, then maybe making pancakes if I'm feeling ambitious. Usually just cereal though, lol.",
+                        "The optimal Sunday morning involves adequate sleep duration, nutritious breakfast consumption, and engaging in mentally stimulating activities.",
+                        "Sleeping in until at least 10, big cup of coffee, and binge-watching something mindless on Netflix while still in my pajamas."
+                    ],
+                    human: 1,
+                    explanation: "Response 2 is the most human. Casual tone, lazy honesty, and self-deprecation."
+                },
+                {
+                    question: "What's something that instantly makes you smile?",
+                    responses: [
+                        "Witnessing acts of kindness between strangers and observing the positive impact of human compassion in society.",
+                        "My dog does this thing where he tilts his head when I say 'walk' and his ears perk up. Gets me every single time.",
+                        "When I observe positive human interactions that demonstrate the inherent goodness in people and their capacity for joy.",
+                        "Seeing elderly couples holding hands - there's something so pure about love that's lasted decades."
+                    ],
+                    human: 1,
+                    explanation: "Response 2 is the most human. Specific pet behavior that evokes genuine emotion."
+                }
+            ];
+
+            // Fisher–Yates shuffle helper
+            const shuffleArray = (array) => {
+                const newArr = [...array];
+                for (let i = newArr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+                }
+                return newArr;
+            };
+
+            const startGame = () => {
+                const scenario = gameScenarios[round % gameScenarios.length];
+
+                // Pair each response with its original index
+                const paired = scenario.responses.map((resp, idx) => ({
+                    text: resp,
+                    originalIndex: idx
+                }));
+
+                // Shuffle the paired responses
+                const shuffled = shuffleArray(paired);
+
+                // Find where the human response ended up after shuffling
+                const shuffledCorrectIndex = shuffled.findIndex(
+                    item => item.originalIndex === scenario.human
+                );
+
+                // Update state with shuffled values
+                setCurrentQuestion(scenario.question);
+                setResponses(shuffled.map(item => item.text));
+                setCorrectAnswer(shuffledCorrectIndex);
+                setExplanation(scenario.explanation);
+
+                setSelectedAnswer(null);
+                setGameState("playing");
+                setRound(prev => prev + 1);
+            };
+
+            const selectAnswer = (index) => {
+                if (gameState === 'playing') setSelectedAnswer(index);
+            };
+
+            const submitAnswer = () => {
+                if (selectedAnswer === correctAnswer) setScore(score + 1);
+                setGameState('result');
+            };
+
+            const playAgain = () => startGame();
+            const resetGame = () => { setGameState('start'); setScore(0); setRound(0); };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 p-6 flex items-center justify-center">
+                    <div className="max-w-2xl w-full mx-auto">
+                        <div className="text-center mb-8">
+                            <div className="flex items-center justify-center gap-2 mb-4">
+                                <Icon name="Heart" color="#ec4899" />
+                                <h1 className="text-4xl font-bold text-gray-800">Spot the Human</h1>
+                                <Icon name="Users" color="#3b82f6" />
+                            </div>
+                            <p className="text-gray-600 text-lg">Can you tell which dating profile answer came from a real person?</p>
+                            {round > 0 && (
+                                <div className="flex items-center justify-center gap-4 mt-4 text-sm bg-white/50 rounded-full px-4 py-2 w-fit mx-auto">
+                                    <div className="flex items-center gap-1">
+                                        <Icon name="Trophy" color="#f59e0b" size={16} />
+                                        <span>Score: {score}/{round}</span>
+                                    </div>
+                                    <div>Round: {round}</div>
+                                </div>
+                            )}
+                        </div>
+
+                        {gameState === 'start' && (
+                            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+                                <div className="mb-6">
+                                    <div className="text-6xl mb-4">🤖💕👤</div>
+                                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Welcome to the Ultimate Dating Turing Test!</h2>
+                                    <p className="text-gray-600 text-lg mb-6">You'll see a dating question and 4 answers. Three are from AI, one is from a human. Can you spot the authentic response?</p>
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                                        <p className="text-blue-800 font-medium">💡 Tip: Look for personal details, casual language, and genuine emotions!</p>
+                                    </div>
+                                </div>
+                                <button onClick={startGame} className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105">Start Playing!</button>
+                            </div>
+                        )}
+
+                        {gameState === 'playing' && (
+                            <div className="bg-white rounded-lg shadow-lg p-8">
+                                <div className="mb-6">
+                                    <h2 className="text-xl font-bold text-gray-800 mb-2">Dating Question:</h2>
+                                    <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
+                                        <p className="text-lg text-pink-800 font-medium">"{currentQuestion}"</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-4 mb-6">
+                                    <h3 className="text-lg font-semibold text-gray-700">Choose the human response:</h3>
+                                    {responses.map((response, index) => (
+                                        <div key={index} onClick={() => selectAnswer(index)} className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                                            selectedAnswer === index ? 'border-purple-500 bg-purple-50 scale-105' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                                        }`}>
+                                            <div className="flex items-start gap-3">
+                                                <div className={`mt-1 w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                                                    selectedAnswer === index ? 'border-purple-500 bg-purple-500' : 'border-gray-300'
+                                                }`}>
+                                                    {selectedAnswer === index && <div className="w-2 h-2 bg-white rounded-full"></div>}
+                                                </div>
+                                                <p className="text-gray-700 flex-1">{response}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-center">
+                                    <button onClick={submitAnswer} disabled={selectedAnswer === null} className={`px-8 py-3 rounded-lg font-semibold transition-all w-full sm:w-auto ${
+                                        selectedAnswer !== null ? 'bg-blue-500 text-white hover:bg-blue-600 transform hover:scale-105' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    }`}>Submit Answer</button>
+                                </div>
+                            </div>
+                        )}
+
+                        {gameState === 'result' && (
+                            <div className="bg-white rounded-lg shadow-lg p-8">
+                                <div className="text-center mb-6">
+                                    {selectedAnswer === correctAnswer ? (
+                                        <div>
+                                            <div className="text-6xl mb-4">🎉</div>
+                                            <h2 className="text-3xl font-bold text-green-600 mb-2">Correct!</h2>
+                                            <p className="text-lg text-gray-600">You spotted the human response!</p>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <div className="text-6xl mb-4">🤖</div>
+                                            <h2 className="text-3xl font-bold text-red-600 mb-2">Not quite!</h2>
+                                            <p className="text-lg text-gray-600">You picked an AI. The human was Option #{correctAnswer + 1}.</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="mb-6">
+                                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                                        <p className="text-green-800"><strong>Human Answer:</strong> "{responses[correctAnswer]}"</p>
+                                    </div>
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                        <p className="text-blue-800"><strong>Why:</strong> {explanation}</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                    <button onClick={playAgain} className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition-all transform hover:scale-105">Play Another Round</button>
+                                    <button onClick={resetGame} className="bg-gray-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                                        <Icon name="RotateCcw" size={18} /> Start Over
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SpotTheHumanGame />);
+    </script>
+</body>
+</html>
