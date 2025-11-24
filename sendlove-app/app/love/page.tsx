@@ -234,7 +234,7 @@ export default function LovePage() {
                       <label className="block text-lg font-medium mb-3 text-purple-800">Choose Payment Method</label>
                       <div className="space-y-3">
                         <a
-                          href="https://wise.com/pay/me/@alexisl628"
+                          href="https://wise.com/pay/me/alexisl628"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
@@ -249,14 +249,11 @@ export default function LovePage() {
                         >
                           💵 Send via CashApp
                         </a>
-                        <a
-                          href="https://cash.me/$CoccoOrseta"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-black text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
-                        >
-                          🍎 Send via Apple Pay
-                        </a>
+                        <div className="block bg-gradient-to-r from-slate-700 to-slate-900 text-white text-lg px-8 py-4 rounded-2xl shadow-lg">
+                          <div className="text-center font-semibold mb-2">🍎 Apple Pay</div>
+                          <div className="text-sm text-center opacity-90">Send via iMessage or email to:</div>
+                          <div className="text-center mt-1 font-mono text-sm">lexxielyn@gmail.com</div>
+                        </div>
                       </div>
                     </div>
                   </div>
