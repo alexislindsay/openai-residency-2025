@@ -31,7 +31,7 @@ export default function HomePage() {
         <div className="mb-8 flex justify-center">
           <div className="animate-float">
             <Image
-              src="/sendlove.png"
+              src="/sendloveCheese.jpg"
               alt="Send Love"
               width={200}
               height={200}
