@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #000;
+  color: #00ff00;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Terminal styling */
+.terminal {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  padding: 2rem;
+  overflow-y: auto;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Custom scrollbar */
+.terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal::-webkit-scrollbar-track {
+  background: #111;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #00cc00;
+}
+
+/* Text effects */
+.glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background-color: #00ff00;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Color themes for different emotions */
+.confession-guilt { color: #ff4444; }
+.confession-shame { color: #ff6b6b; }
+.confession-regret { color: #ffa500; }
+.confession-pride { color: #9b59b6; }
+.confession-joy { color: #00ffff; }
+.confession-default { color: #00ff00; }
+
+/* Faith representative colors */
+.faith-catholic { color: #ffd700; }
+.faith-rabbi { color: #4169e1; }
+.faith-buddhist { color: #ff8c00; }
+.faith-spiritual { color: #9370db; }
+
+/* Input styling */
+input {
+  background: transparent;
+  border: none;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  caret-color: #00ff00;
+}
+
+input::placeholder {
+  color: #006600;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background: #00ff00;
+  color: #000;
+  box-shadow: 0 0 20px #00ff00;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ASCII art and decorative elements */
+.ascii-art {
+  white-space: pre;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+/* Book preview styling */
+.book-preview {
+  background: #1a1a1a;
+  border: 2px solid #00ff00;
+  padding: 2rem;
+  margin: 1rem 0;
+  max-width: 800px;
+}
+
+.book-page {
+  background: #fff;
+  color: #000;
+  padding: 2rem;
+  margin: 1rem 0;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
