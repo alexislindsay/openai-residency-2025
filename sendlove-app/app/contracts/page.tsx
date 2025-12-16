@@ -14,9 +14,11 @@ export default function ContractsPage() {
           <motion.div
             key={i}
             className="absolute"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
               opacity: 0.1
             }}
             animate={{
