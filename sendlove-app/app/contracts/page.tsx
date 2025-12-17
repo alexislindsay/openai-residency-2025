@@ -1,40 +1,49 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Heart, Feather, Sparkles, Lock, Infinity, Star } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 
 export default function ContractsPage() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
       {/* Floating background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            initial={{
-              opacity: 0.1
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.1, 0.3, 0.1]
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-          >
-            <Heart className="w-8 h-8 text-pink-400" fill="currentColor" />
-          </motion.div>
-        ))}
-      </div>
+      {mounted && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              initial={{
+                opacity: 0.1
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.1, 0.3, 0.1]
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                delay: Math.random() * 2
+              }}
+            >
+              <Heart className="w-8 h-8 text-pink-400" fill="currentColor" />
+            </motion.div>
+          ))}
+        </div>
+      )}
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-4 py-16">
