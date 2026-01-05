@@ -250,7 +250,7 @@ export default function LovePage() {
                           💵 Send via CashApp
                         </a>
                         <a
-                          href="https://account.revolut.com/pay/YOUR_REVOLUT_USERNAME"
+                          href="https://revolut.me/alexisd6y6"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="block bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
@@ -261,9 +261,10 @@ export default function LovePage() {
                           href="https://venmo.com/YOUR_VENMO_USERNAME"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                          className="block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold opacity-60 cursor-not-allowed"
+                          onClick={(e) => e.preventDefault()}
                         >
-                          💙 Send via Venmo
+                          💙 Venmo (Coming Soon)
                         </a>
                       </div>
                     </div>
