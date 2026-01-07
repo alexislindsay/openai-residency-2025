@@ -57,12 +57,21 @@ export default function HomePage() {
         </p>
 
         <div className="space-y-6">
-          <Link href="/love">
-            <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-xl px-12 py-6 rounded-full shadow-xl transition-all hover:shadow-2xl hover:scale-105">
-              <Heart className="w-6 h-6 mr-3" />
-              Send Love
-              <ArrowRight className="w-6 h-6 ml-3" />
+          {/* Fast-track money button */}
+          <Link href="/love?money=true">
+            <Button className="bg-gradient-to-r from-pink-500 via-purple-600 to-rose-600 hover:from-pink-600 hover:via-purple-700 hover:to-rose-700 text-white text-2xl px-16 py-8 rounded-3xl shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105">
+              <Sparkles className="w-8 h-8 mr-4" />
+              Send Love Now
+              <ArrowRight className="w-8 h-8 ml-4" />
             </Button>
+          </Link>
+          <p className="text-purple-600/70 text-lg">Quick & easy monetary support</p>
+
+          {/* Alternative link for other options */}
+          <Link href="/love" className="block">
+            <p className="text-purple-500/70 hover:text-purple-600 transition-colors text-base underline">
+              or send words/gifts instead
+            </p>
           </Link>
 
           <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-8 max-w-md mx-auto shadow-lg border border-purple-200/50">
