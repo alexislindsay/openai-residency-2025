@@ -310,7 +310,7 @@ export default function LovePage() {
                     <div className="text-slate-700 text-lg">
                       <p className="mb-4">Send love through physical gifts:</p>
                       <a
-                        href="https://www.amazon.com/hz/wishlist/ls/YOUR_WISHLIST_ID"
+                        href="https://www.amazon.it/hz/wishlist/ls/7GAP7VS9ARRG?ref_=wl_share"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
