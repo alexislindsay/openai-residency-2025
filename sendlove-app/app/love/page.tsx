@@ -165,7 +165,28 @@ export default function LovePage() {
 
         {/* Mode Selection */}
         {!mode && !showGlyph && (
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto">
+            {/* Direct Money Button - Fast Track */}
+            <div className="mb-12 text-center">
+              <Button
+                onClick={() => setMode("money")}
+                className="bg-gradient-to-r from-pink-500 via-purple-600 to-rose-600 hover:from-pink-600 hover:via-purple-700 hover:to-rose-700 text-white text-2xl px-16 py-8 rounded-3xl shadow-2xl hover:shadow-purple-500/50 transition-all transform hover:scale-105"
+              >
+                <DollarSign className="w-8 h-8 mr-4" />
+                Send Love Now
+                <Sparkles className="w-8 h-8 ml-4" />
+              </Button>
+              <p className="text-purple-600/70 mt-4 text-lg">Quick & easy monetary support</p>
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center gap-4 mb-12">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-purple-300/50 to-transparent"></div>
+              <p className="text-purple-500/70 text-lg font-light">or choose another form</p>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-purple-300/50 to-transparent"></div>
+            </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
             <Card
               className="bg-white/70 backdrop-blur-lg border border-pink-200/50 hover:bg-white/80 hover:border-pink-300/70 hover:shadow-xl transition-all cursor-pointer group shadow-lg rounded-3xl"
               onClick={() => setMode("money")}
@@ -204,6 +225,7 @@ export default function LovePage() {
                 <p className="text-slate-600 text-lg">Through physical gifts</p>
               </CardContent>
             </Card>
+          </div>
           </div>
         )}
 
@@ -249,11 +271,22 @@ export default function LovePage() {
                         >
                           💵 Send via CashApp
                         </a>
-                        <div className="block bg-gradient-to-r from-slate-700 to-slate-900 text-white text-lg px-8 py-4 rounded-2xl shadow-lg">
-                          <div className="text-center font-semibold mb-2">🍎 Apple Pay</div>
-                          <div className="text-sm text-center opacity-90">Send via iMessage or email to:</div>
-                          <div className="text-center mt-1 font-mono text-sm">lexxielyn@gmail.com</div>
-                        </div>
+                        <a
+                          href="https://revolut.me/alexisd6y6"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          💳 Send via Revolut
+                        </a>
+                        <a
+                          href="https://ko-fi.com/bunnytrixx"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          ☕ Send via Ko-fi
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -277,7 +310,7 @@ export default function LovePage() {
                     <div className="text-slate-700 text-lg">
                       <p className="mb-4">Send love through physical gifts:</p>
                       <a
-                        href="https://www.amazon.com/hz/wishlist/ls/YOUR_WISHLIST_ID"
+                        href="https://www.amazon.it/hz/wishlist/ls/7GAP7VS9ARRG?ref_=wl_share"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"

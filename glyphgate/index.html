@@ -246,8 +246,8 @@ main
       <span class="icon-label">Morph</span>
     </div>
   </div>
-  <div id="contactIconWrapper" class="icon-wrapper">
-    <img id="contactIcon" class="icon" src="sendlove.png" alt="Contact Me" />
+  <a href="https://sendlove-bae.vercel.app/" id="contactIconWrapper" class="icon-wrapper">
+    <img class="icon" src="sendlove.png" alt="Contact Me" />
     <div class="icon-label-wrapper">
       <span class="icon-label">Contact Me</span>
     </div>
@@ -330,7 +330,8 @@ main
       });
     };
 
-    document.getElementById("contactIconWrapper").onclick = () => {
+    document.getElementById("contactIconWrapper").onclick = (e) => {
+      e.preventDefault(); // Prevent immediate navigation
       typeText("I connect", () => {
         input.value = ""; // Clear before navigating
         window.location.href = "https://sendlove-bae.vercel.app/";

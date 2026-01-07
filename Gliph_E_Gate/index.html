@@ -474,12 +474,12 @@ main
     </div>
 
   </div>
-  <div id="contactIconWrapper" class="icon-wrapper">
-    <img id="contactIcon" class="icon" src="sendlove.png" alt="Contact Me" />
+  <a href="https://sendlove-bae.vercel.app/" id="contactIconWrapper" class="icon-wrapper">
+    <img class="icon" src="sendlove.png" alt="Contact Me" />
     <div class="icon-label-wrapper">
       <span class="icon-label">Contact Me</span>
     </div>
-  </div>
+  </a>
   <div id="spotHumanIconWrapper" class="icon-wrapper">
     <img id="spotHumanIcon" class="icon" src="moon.png" alt="Spot the Human" />
     <div class="icon-label-wrapper">
@@ -565,7 +565,8 @@ main
       });
     };
 
-    document.getElementById("contactIconWrapper").onclick = () => {
+    document.getElementById("contactIconWrapper").onclick = (e) => {
+      e.preventDefault(); // Prevent immediate navigation
       typeText("I connect", () => {
         input.value = ""; // Clear before navigating
         window.location.href = "https://sendlove-bae.vercel.app/";
