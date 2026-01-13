@@ -47,11 +47,7 @@ export default function HomePage() {
               LOVE
             </h1>
           </div>
-          <Link href="/contact" target="_blank" rel="noopener noreferrer">
-            <p className="text-xs text-purple-400 mt-2 hover:text-purple-600 transition-colors cursor-pointer underline decoration-purple-400/50 hover:decoration-purple-600">
-              contact me
-            </p>
-          </Link>
+          <p className="text-xs text-purple-400 mt-2">contact me</p>
         </div>
         <p className="text-lg md:text-xl text-purple-600 font-bold mb-2 drop-shadow-md">through</p>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-purple-700 mb-8 drop-shadow-lg">The Glyph Gate</h2>
