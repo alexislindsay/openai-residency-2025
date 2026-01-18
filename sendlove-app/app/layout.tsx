@@ -17,7 +17,11 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   title: "Send Love - The Glyph Gate",
   description: "A digital portal for transmitting love in all its forms. Send love through monetary energy, words & feelings, or physical gifts.",
-  generator: 'v0.dev'
+  generator: 'v0.dev',
+  icons: {
+    icon: '/sendlove.png',
+    apple: '/sendlove.png',
+  }
 }
 
 export default function RootLayout({
