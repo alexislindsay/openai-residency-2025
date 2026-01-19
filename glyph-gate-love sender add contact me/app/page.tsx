@@ -1,10 +1,62 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Heart, Sparkles, Star } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { ArrowRight, Heart, Sparkles, Star, Send } from "lucide-react"
 
 export default function HomePage() {
+  const [isContactOpen, setIsContactOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+    setErrorMessage("")
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+        setTimeout(() => {
+          setIsContactOpen(false)
+          setSubmitStatus("idle")
+        }, 3000)
+      } else {
+        setSubmitStatus("error")
+        setErrorMessage(data.message || "Something went wrong. Please try again.")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+      setErrorMessage("Failed to send message. Please try again later.")
+      console.error("Contact form error:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-rose-950 flex items-center justify-center relative overflow-hidden">
       {/* Magenta glow overlays */}
@@ -60,8 +112,115 @@ export default function HomePage() {
               <p>Constellation: 🌙 Growing</p>
             </div>
           </div>
+
+          {/* Mirrored Elephant Contact Button */}
+          <div
+            className="mt-12 group cursor-pointer relative"
+            onClick={() => setIsContactOpen(true)}
+          >
+            <div className="flex items-center justify-center gap-2 text-5xl md:text-6xl transition-all group-hover:scale-110">
+              <span className="inline-block">🐘</span>
+              <span className="inline-block scale-x-[-1]">🐘</span>
+            </div>
+            <p className="text-magenta-200/60 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              contact me
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
+        <DialogContent className="bg-slate-900/95 backdrop-blur-xl border border-magenta-500/40 text-white max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-serif text-transparent bg-gradient-to-r from-magenta-300 via-pink-200 to-rose-300 bg-clip-text">
+              Contact Me
+            </DialogTitle>
+          </DialogHeader>
+
+          {submitStatus === "success" ? (
+            <div className="text-center py-8">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                <Sparkles className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-4">Message Sent! ✨</h3>
+              <p className="text-magenta-100/80">
+                Thank you for reaching out! I'll get back to you soon.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-magenta-100">
+                  Your Name
+                </Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Enter your name..."
+                  className="bg-slate-800/50 border-magenta-500/40 text-white placeholder-magenta-300/60 focus:border-magenta-400"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-magenta-100">
+                  Your Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="your@email.com"
+                  className="bg-slate-800/50 border-magenta-500/40 text-white placeholder-magenta-300/60 focus:border-magenta-400"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-magenta-100">
+                  Your Message
+                </Label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Tell me what's on your mind..."
+                  className="bg-slate-800/50 border-magenta-500/40 text-white placeholder-magenta-300/60 min-h-32 focus:border-magenta-400"
+                  required
+                />
+              </div>
+
+              {submitStatus === "error" && (
+                <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3">
+                  <p className="text-red-200 text-sm text-center">{errorMessage}</p>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-magenta-600 to-pink-700 hover:from-magenta-700 hover:to-pink-800 text-white shadow-lg"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Sparkles className="w-4 h-4 mr-2 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <style jsx>{`
         @keyframes float {
