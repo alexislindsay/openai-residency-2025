@@ -102,6 +102,8 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
+    #contactIconWrapper { top: 60%; right: 10%; }
+    #manifestationsIconWrapper { top: 60%; left: 10%; }
 
 
     /* =======================================
@@ -195,6 +197,8 @@ main
         #writeIconWrapper { top: 15%; right: 10%; }
         #moonIconWrapper  { top: 40%; left: 5%; }
         #morphIconWrapper { top: 40%; right: 5%; }
+        #contactIconWrapper { top: 65%; right: 5%; }
+        #manifestationsIconWrapper { top: 65%; left: 5%; }
 
         #inputBox {
             width: 80%;
@@ -240,6 +244,18 @@ main
     <img id="morphIcon" class="icon" src="morph.png" alt="Morph" />
     <div class="icon-label-wrapper">
       <span class="icon-label">Morph</span>
+    </div>
+  </div>
+  <a href="https://sendlove-bae.vercel.app/" id="contactIconWrapper" class="icon-wrapper">
+    <img class="icon" src="sendlove.png" alt="Contact Me" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Contact Me</span>
+    </div>
+  </div>
+  <div id="manifestationsIconWrapper" class="icon-wrapper">
+    <img id="manifestationsIcon" class="icon" src="manifestations.png" alt="Manifestations" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Manifestations</span>
     </div>
   </div>
 
@@ -311,6 +327,21 @@ main
       typeText("I begin", () => {
         input.value = ""; // Clear before navigating
         window.location.href = "https://moon-ui-divination-portal.vercel.app/";
+      });
+    };
+
+    document.getElementById("contactIconWrapper").onclick = (e) => {
+      e.preventDefault(); // Prevent immediate navigation
+      typeText("I connect", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://sendlove-bae.vercel.app/";
+      });
+    };
+
+    document.getElementById("manifestationsIconWrapper").onclick = () => {
+      typeText("I manifest", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://www.teepublic.com/user/fap-fashion";
       });
     };
 
