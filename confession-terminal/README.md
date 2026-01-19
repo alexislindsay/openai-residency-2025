@@ -10,6 +10,8 @@ This is an exploration of emotional AI, vulnerability, and the recursive logic o
 
 ## Features
 
+- **🎤 Voice Confession**: Speak your sins using OpenAI Whisper API for speech-to-text
+- **⌨️ Text Input**: Traditional typed confessions for the quiet souls
 - **Terminal-style interface**: Dark, atmospheric, intimate design
 - **4 Faith Representatives**:
   - Father Digital (E-Priest) - Catholic confession
@@ -30,9 +32,13 @@ This is an exploration of emotional AI, vulnerability, and the recursive logic o
 - **TypeScript** - Type safety
 - **Framer Motion** - Smooth animations
 - **date-fns** - Date formatting
+- **OpenAI Whisper API** - Speech-to-text transcription
+- **Web Audio API** - Microphone recording
 - **localStorage** - Client-side persistence (no backend)
 
 ## Installation
+
+### Quick Start (Text Only)
 
 ```bash
 cd confession-terminal
@@ -41,6 +47,23 @@ npm run dev
 ```
 
 Open http://localhost:5173
+
+### Voice Confession Setup
+
+To enable voice confessions, you need an OpenAI API key:
+
+1. Get an API key from https://platform.openai.com/api-keys
+2. Create a `.env` file in `confession-terminal/`:
+   ```bash
+   cp .env.example .env
+   ```
+3. Add your key to `.env`:
+   ```bash
+   VITE_OPENAI_API_KEY=sk-your-key-here
+   ```
+4. Restart the dev server
+
+**See [SETUP.md](./SETUP.md) for detailed instructions and troubleshooting.**
 
 ## Usage Flow
 

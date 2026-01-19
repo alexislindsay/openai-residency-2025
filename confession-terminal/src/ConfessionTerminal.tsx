@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { format } from 'date-fns'
+import VoiceRecorder from './VoiceRecorder'
+import { Keyboard } from 'lucide-react'
 
 // Types
 interface Confession {
@@ -91,6 +93,7 @@ export default function ConfessionTerminal() {
   const [currentInput, setCurrentInput] = useState('')
   const [confessions, setConfessions] = useState<Confession[]>([])
   const [isTyping, setIsTyping] = useState(false)
+  const [inputMode, setInputMode] = useState<'voice' | 'text'>('voice')
   const terminalRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -375,22 +378,69 @@ You are free.
             ))}
 
             {!isTyping && (
-              <div style={{ display: 'flex', alignItems: 'center', marginTop: '2rem' }}>
-                <span>&gt; </span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={currentInput}
-                  onChange={(e) => setCurrentInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleConfession(currentInput)
-                    }
-                  }}
-                  placeholder="Type your confession..."
-                  style={{ flex: 1, marginLeft: '0.5rem' }}
-                />
-                <span className="typing-cursor"></span>
+              <div style={{ marginTop: '2rem' }}>
+                {/* Mode Toggle */}
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <button
+                    onClick={() => setInputMode('voice')}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: inputMode === 'voice' ? '#00ff00' : 'transparent',
+                      color: inputMode === 'voice' ? '#000' : '#00ff00',
+                      border: '1px solid #00ff00',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px'
+                    }}
+                  >
+                    🎤 Voice
+                  </button>
+                  <button
+                    onClick={() => setInputMode('text')}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: inputMode === 'text' ? '#00ff00' : 'transparent',
+                      color: inputMode === 'text' ? '#000' : '#00ff00',
+                      border: '1px solid #00ff00',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px'
+                    }}
+                  >
+                    ⌨ Text
+                  </button>
+                </div>
+
+                {/* Voice Input */}
+                {inputMode === 'voice' && (
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <VoiceRecorder
+                      onTranscription={(text) => handleConfession(text)}
+                      disabled={isTyping}
+                    />
+                  </div>
+                )}
+
+                {/* Text Input */}
+                {inputMode === 'text' && (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span>&gt; </span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={currentInput}
+                      onChange={(e) => setCurrentInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleConfession(currentInput)
+                        }
+                      }}
+                      placeholder="Type your confession..."
+                      style={{ flex: 1, marginLeft: '0.5rem' }}
+                    />
+                    <span className="typing-cursor"></span>
+                  </div>
+                )}
               </div>
             )}
           </motion.div>
