@@ -1,11 +1,18 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Heart, Feather, Sparkles, Lock, Infinity, Star } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 
 export default function ContractsPage() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
       {/* Floating background elements */}
