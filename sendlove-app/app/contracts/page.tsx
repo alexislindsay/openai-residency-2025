@@ -16,34 +16,30 @@ export default function ContractsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
       {/* Floating background elements */}
-      {mounted && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              initial={{
-                opacity: 0.1
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.1, 0.3, 0.1]
-              }}
-              transition={{
-                duration: 5 + Math.random() * 5,
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
-            >
-              <Heart className="w-8 h-8 text-pink-400" fill="currentColor" />
-            </motion.div>
-          ))}
-        </div>
-      )}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            initial={{
+              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
+              y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 1000,
+              opacity: 0.1
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.1, 0.3, 0.1]
+            }}
+            transition={{
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              delay: Math.random() * 2
+            }}
+          >
+            <Heart className="w-8 h-8 text-pink-400" fill="currentColor" />
+          </motion.div>
+        ))}
+      </div>
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-4 py-16">

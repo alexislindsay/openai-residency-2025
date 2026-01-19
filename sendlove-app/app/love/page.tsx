@@ -107,6 +107,14 @@ export default function LovePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showGlyph, setShowGlyph] = useState(false)
 
+  // Check URL params for direct mode
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('money') === 'true') {
+      setMode('money')
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -249,11 +257,22 @@ export default function LovePage() {
                         >
                           💵 Send via CashApp
                         </a>
-                        <div className="block bg-gradient-to-r from-slate-700 to-slate-900 text-white text-lg px-8 py-4 rounded-2xl shadow-lg">
-                          <div className="text-center font-semibold mb-2">🍎 Apple Pay</div>
-                          <div className="text-sm text-center opacity-90">Send via iMessage or email to:</div>
-                          <div className="text-center mt-1 font-mono text-sm">lexxielyn@gmail.com</div>
-                        </div>
+                        <a
+                          href="https://revolut.me/alexisd6y6"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          💳 Send via Revolut
+                        </a>
+                        <a
+                          href="https://ko-fi.com/bunnytrixx"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gradient-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
+                        >
+                          ☕ Send via Ko-fi
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -277,7 +296,7 @@ export default function LovePage() {
                     <div className="text-slate-700 text-lg">
                       <p className="mb-4">Send love through physical gifts:</p>
                       <a
-                        href="https://www.amazon.com/hz/wishlist/ls/YOUR_WISHLIST_ID"
+                        href="https://www.amazon.it/hz/wishlist/ls/7GAP7VS9ARRG?ref_=wl_share"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all text-center font-semibold"
