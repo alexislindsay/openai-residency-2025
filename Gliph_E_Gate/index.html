@@ -140,8 +140,9 @@
     #writeIconWrapper  { top: 10%; right: 20%; }
     #moonIconWrapper   { top: 30%; left: 10%; }
     #morphIconWrapper  { top: 30%; right: 10%; }
-    #contactIconWrapper { top: 60%; right: 10%; }
-    #spotHumanIconWrapper { top: 60%; left: 10%; }
+    #breathIconWrapper { top: 48%; left: 15%; }
+    #contactIconWrapper { top: 65%; right: 10%; }
+    #spotHumanIconWrapper { top: 65%; left: 10%; }
 
 
     /* =======================================
@@ -472,7 +473,12 @@ main
     <div class="icon-label-wrapper">
       <span class="icon-label">Morph</span>
     </div>
-
+  </div>
+  <div id="breathIconWrapper" class="icon-wrapper">
+    <img id="breathIcon" class="icon" src="breath.png" alt="LexOS Breath Portal" />
+    <div class="icon-label-wrapper">
+      <span class="icon-label">Breathe</span>
+    </div>
   </div>
   <a href="https://sendlove-bae.vercel.app/" id="contactIconWrapper" class="icon-wrapper">
     <img class="icon" src="sendlove.png" alt="Contact Me" />
@@ -562,6 +568,13 @@ main
       typeText("I begin", () => {
         input.value = ""; // Clear before navigating
         window.location.href = "https://moon-ui-divination-portal.vercel.app/";
+      });
+    };
+
+    document.getElementById("breathIconWrapper").onclick = () => {
+      typeText("I breathe", () => {
+        input.value = ""; // Clear before navigating
+        window.location.href = "https://breathe.alexislindsay.com";
       });
     };
 
