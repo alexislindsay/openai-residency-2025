@@ -253,8 +253,8 @@
 
   <!-- 3. My Writing (Upper-Right) -->
   <div id="writeIconWrapper" class="icon-wrapper">
-    <img id="writeIcon" class="icon" src="butterfiles.png" alt="My Writing" />
-    <span class="icon-label">My Writing</span>
+    <img id="writeIcon" class="icon" src="butterfly_chat.png" alt="Butterfly Chat" />
+    <span class="icon-label">Butterfly Chat</span>
   </div>
 
   <!-- 4. Breathe (Mid-Left) -->
@@ -343,12 +343,12 @@
       });
     };
 
-    // 3. My Writing (Substack)
+    // 3. Butterfly Chat
     document.getElementById("writeIconWrapper").onclick = () => {
       closeAllPanels();
-      typeText("I read it", () => {
+      typeText("I chat", () => {
         input.value = "";
-        window.location.href = "https://substack.com/@alexis88";
+        window.location.href = "https://chat.alexislindsay.com";
       });
     };
 
