@@ -93,6 +93,11 @@
       transition: filter 0.3s ease;
     }
 
+    .icon-wrapper .tarot-icon {
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
     .icon-wrapper:hover .icon {
       filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.85));
     }
@@ -124,27 +129,31 @@
       50% { transform: translateY(-12px); }
     }
 
-    #aboutIconWrapper    { animation-delay: 0s; }
+    #tarotIconWrapper    { animation-delay: 0s; }
+    #aboutIconWrapper    { animation-delay: -0.6s; }
     #writeIconWrapper    { animation-delay: -1.2s; }
-    #breathIconWrapper   { animation-delay: -2.4s; }
-    #morphIconWrapper    { animation-delay: -0.6s; }
-    #contactIconWrapper  { animation-delay: -1.8s; }
-    #manifestIconWrapper { animation-delay: -3.0s; }
+    #breathIconWrapper   { animation-delay: -1.8s; }
+    #morphIconWrapper    { animation-delay: -2.4s; }
+    #contactIconWrapper  { animation-delay: -3.0s; }
+    #manifestIconWrapper { animation-delay: -3.6s; }
 
     /* ========================================================
-       PERFECT 6-POINT OVAL / ELLIPSE COORDINATES (DESKTOP)
+       7-POINT BALANCED CONSTELLATION COORDINATES (DESKTOP)
        ======================================================== */
-    /* Top Arc */
-    #aboutIconWrapper    { top: 16%; left: 22%; }
-    #writeIconWrapper    { top: 16%; right: 22%; }
+    /* Zenith (Top Center) */
+    #tarotIconWrapper    { top: 7%; left: 50%; transform: translateX(-50%); }
+
+    /* Upper Arc */
+    #aboutIconWrapper    { top: 22%; left: 18%; }
+    #writeIconWrapper    { top: 22%; right: 18%; }
 
     /* Mid Arc (Equator) */
-    #breathIconWrapper   { top: 48%; left: 10%; transform: translateY(-50%); }
-    #morphIconWrapper    { top: 48%; right: 10%; transform: translateY(-50%); }
+    #breathIconWrapper   { top: 50%; left: 8%; transform: translateY(-50%); }
+    #morphIconWrapper    { top: 50%; right: 8%; transform: translateY(-50%); }
 
-    /* Bottom Arc */
-    #contactIconWrapper  { bottom: 14%; left: 22%; }
-    #manifestIconWrapper { bottom: 14%; right: 22%; }
+    /* Lower Arc */
+    #contactIconWrapper  { bottom: 12%; left: 20%; }
+    #manifestIconWrapper { bottom: 12%; right: 20%; }
 
     /* Reset / Close Elephant */
     #elephant {
@@ -214,18 +223,19 @@
 
     /* Media Queries for Mobile & Tablet */
     @media (max-width: 768px) {
-      h1 { font-size: 1.6rem; margin-bottom: 16px; }
+      h1 { font-size: 1.5rem; margin-bottom: 14px; }
       .icon-wrapper { width: 85px; height: 85px; }
-      .icon-wrapper .icon { width: 54px; height: 54px; }
+      .icon-wrapper .icon { width: 52px; height: 52px; }
       .icon-label { font-size: 0.65rem; }
 
-      /* Mobile 2-Column Balanced Layout */
-      #aboutIconWrapper    { top: 12%; left: 8%; }
-      #writeIconWrapper    { top: 12%; right: 8%; }
-      #breathIconWrapper   { top: 38%; left: 4%; }
-      #morphIconWrapper    { top: 38%; right: 4%; }
-      #contactIconWrapper  { bottom: 12%; left: 8%; }
-      #manifestIconWrapper { bottom: 12%; right: 8%; }
+      /* Mobile Constellation */
+      #tarotIconWrapper    { top: 8%; left: 50%; transform: translateX(-50%); }
+      #aboutIconWrapper    { top: 22%; left: 6%; }
+      #writeIconWrapper    { top: 22%; right: 6%; }
+      #breathIconWrapper   { top: 42%; left: 4%; }
+      #morphIconWrapper    { top: 42%; right: 4%; }
+      #contactIconWrapper  { bottom: 10%; left: 8%; }
+      #manifestIconWrapper { bottom: 10%; right: 8%; }
     }
   </style>
 </head>
@@ -234,37 +244,43 @@
   <h1>The Glyph Gate</h1>
   <input id="inputBox" placeholder="Say what you see." disabled />
 
-  <!-- 1. About Me (Top-Left) -->
+  <!-- 1. Tarot (Zenith / Moon UI Divination Portal) -->
+  <div id="tarotIconWrapper" class="icon-wrapper">
+    <img id="tarotIcon" class="icon tarot-icon" src="tarot.png" alt="Moon UI Tarot Portal" />
+    <span class="icon-label">Tarot</span>
+  </div>
+
+  <!-- 2. About Me (Upper-Left) -->
   <div id="aboutIconWrapper" class="icon-wrapper">
     <img id="aboutIcon" class="icon" src="aboutme.png" alt="About Me" />
     <span class="icon-label">About Me</span>
   </div>
 
-  <!-- 2. My Writing (Top-Right) -->
+  <!-- 3. My Writing (Upper-Right) -->
   <div id="writeIconWrapper" class="icon-wrapper">
     <img id="writeIcon" class="icon" src="butterfiles.png" alt="My Writing" />
     <span class="icon-label">My Writing</span>
   </div>
 
-  <!-- 3. Breathe (Mid-Left) -->
+  <!-- 4. Breathe (Mid-Left) -->
   <div id="breathIconWrapper" class="icon-wrapper">
     <img id="breathIcon" class="icon" src="breath.png" alt="LexOS Breath Portal" />
     <span class="icon-label">Breathe</span>
   </div>
 
-  <!-- 4. Code (Mid-Right) -->
+  <!-- 5. Code (Mid-Right) -->
   <div id="morphIconWrapper" class="icon-wrapper">
     <img id="morphIcon" class="icon" src="morph.png" alt="Code" />
     <span class="icon-label">Code</span>
   </div>
 
-  <!-- 5. Contact Me (Bottom-Left) -->
+  <!-- 6. Contact Me (Lower-Left) -->
   <div id="contactIconWrapper" class="icon-wrapper">
     <img id="contactIcon" class="icon" src="sendlove.png" alt="Contact Me" />
     <span class="icon-label">Contact Me</span>
   </div>
 
-  <!-- 6. Manifestations (Bottom-Right) -->
+  <!-- 7. Manifestations (Lower-Right) -->
   <div id="manifestIconWrapper" class="icon-wrapper">
     <img id="manifestIcon" class="icon" src="manifestations.png" alt="Manifestations" />
     <span class="icon-label">Manifest</span>
@@ -314,7 +330,16 @@
       contentPanels.forEach(panel => panel.classList.remove("visible"));
     }
 
-    // 1. About Me
+    // 1. Tarot (Moon UI Divination Portal)
+    document.getElementById("tarotIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I divine", () => {
+        input.value = "";
+        window.location.href = "https://tarot.alexislindsay.com";
+      });
+    };
+
+    // 2. About Me
     document.getElementById("aboutIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I see you", () => {
@@ -323,7 +348,7 @@
       });
     };
 
-    // 2. My Writing (Substack)
+    // 3. My Writing (Substack)
     document.getElementById("writeIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I read it", () => {
@@ -332,7 +357,7 @@
       });
     };
 
-    // 3. Breathe (LexOS Portal)
+    // 4. Breathe (LexOS Portal)
     document.getElementById("breathIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I breathe", () => {
@@ -341,7 +366,7 @@
       });
     };
 
-    // 4. Code (GitHub)
+    // 5. Code (GitHub)
     document.getElementById("morphIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I code", () => {
@@ -350,7 +375,7 @@
       });
     };
 
-    // 5. Contact Me (Send Love)
+    // 6. Contact Me (Send Love)
     document.getElementById("contactIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I connect", () => {
@@ -359,7 +384,7 @@
       });
     };
 
-    // 6. Manifestations
+    // 7. Manifestations
     document.getElementById("manifestIconWrapper").onclick = () => {
       closeAllPanels();
       typeText("I want it", () => {
