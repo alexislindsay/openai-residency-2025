@@ -130,25 +130,32 @@
     #breathIconWrapper   { animation-delay: -1.8s; }
     #morphIconWrapper    { animation-delay: -2.4s; }
     #contactIconWrapper  { animation-delay: -3.0s; }
-    #manifestIconWrapper { animation-delay: -3.6s; }
+    #manifestIconWrapper { animation-delay: -3.0s; }
+    #cardsIconWrapper    { animation-delay: -3.5s; }
 
     /* ========================================================
        7-POINT BALANCED CONSTELLATION COORDINATES (DESKTOP)
        ======================================================== */
+    /* ========================================================
+       8-POINT BALANCED CELESTIAL RING COORDINATES (DESKTOP)
+       ======================================================== */
     /* Zenith (Top Center) */
-    #tarotIconWrapper    { top: 7%; left: 50%; transform: translateX(-50%); }
+    #tarotIconWrapper    { top: 5%; left: 50%; transform: translateX(-50%); }
 
     /* Upper Arc */
-    #aboutIconWrapper    { top: 22%; left: 18%; }
-    #writeIconWrapper    { top: 22%; right: 18%; }
+    #aboutIconWrapper    { top: 18%; left: 20%; }
+    #writeIconWrapper    { top: 18%; right: 20%; }
 
     /* Mid Arc (Equator) */
-    #breathIconWrapper   { top: 50%; left: 8%; transform: translateY(-50%); }
-    #morphIconWrapper    { top: 50%; right: 8%; transform: translateY(-50%); }
+    #breathIconWrapper   { top: 48%; left: 8%; transform: translateY(-50%); }
+    #morphIconWrapper    { top: 48%; right: 8%; transform: translateY(-50%); }
 
     /* Lower Arc */
-    #contactIconWrapper  { bottom: 12%; left: 20%; }
-    #manifestIconWrapper { bottom: 12%; right: 20%; }
+    #contactIconWrapper  { bottom: 18%; left: 20%; }
+    #manifestIconWrapper { bottom: 18%; right: 20%; }
+
+    /* Nadir (Bottom Center) */
+    #cardsIconWrapper    { bottom: 5%; left: 50%; transform: translateX(-50%); }
 
     /* Reset / Close Elephant */
     #elephant {
@@ -223,14 +230,15 @@
       .icon-wrapper .icon { width: 52px; height: 52px; }
       .icon-label { font-size: 0.65rem; }
 
-      /* Mobile Constellation */
-      #tarotIconWrapper    { top: 8%; left: 50%; transform: translateX(-50%); }
-      #aboutIconWrapper    { top: 22%; left: 6%; }
-      #writeIconWrapper    { top: 22%; right: 6%; }
-      #breathIconWrapper   { top: 42%; left: 4%; }
-      #morphIconWrapper    { top: 42%; right: 4%; }
-      #contactIconWrapper  { bottom: 10%; left: 8%; }
-      #manifestIconWrapper { bottom: 10%; right: 8%; }
+      /* Mobile 8-Point Constellation */
+      #tarotIconWrapper    { top: 6%; left: 50%; transform: translateX(-50%); }
+      #aboutIconWrapper    { top: 18%; left: 6%; }
+      #writeIconWrapper    { top: 18%; right: 6%; }
+      #breathIconWrapper   { top: 38%; left: 4%; }
+      #morphIconWrapper    { top: 38%; right: 4%; }
+      #contactIconWrapper  { bottom: 18%; left: 6%; }
+      #manifestIconWrapper { bottom: 18%; right: 6%; }
+      #cardsIconWrapper    { bottom: 5%; left: 50%; transform: translateX(-50%); }
     }
   </style>
 </head>
@@ -279,6 +287,12 @@
   <div id="manifestIconWrapper" class="icon-wrapper">
     <img id="manifestIcon" class="icon" src="manifestations.png" alt="Manifestations" />
     <span class="icon-label">Manifest</span>
+  </div>
+
+  <!-- 8. Play Cards (Poker Duel / Card Arcade) -->
+  <div id="cardsIconWrapper" class="icon-wrapper">
+    <img id="cardsIcon" class="icon cards-icon" src="cards.png" alt="Play Cards" />
+    <span class="icon-label">Play Cards</span>
   </div>
 
   <!-- About Slide Modal -->
@@ -385,6 +399,15 @@
       typeText("I want it", () => {
         input.value = "";
         window.location.href = "https://www.teepublic.com/user/fap-fashion";
+      });
+    };
+
+    // 8. Play Cards
+    document.getElementById("cardsIconWrapper").onclick = () => {
+      closeAllPanels();
+      typeText("I play", () => {
+        input.value = "";
+        window.location.href = "https://playcards.alexislindsay.com";
       });
     };
 
